@@ -18,7 +18,7 @@ require('../class/user.php');
 
 if (isset($_POST["connect"])){
                 $user = new User();
-                $user->ConnectUser($_POST['login'], $_POST['password']); 
+                $user->ConnectUser($_POST['login'], $_POST['password']);
                 }
                 var_dump($_POST);
 ?>

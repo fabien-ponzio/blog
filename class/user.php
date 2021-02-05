@@ -150,20 +150,21 @@ function profile($login, $email, $password, $confirmPW){ echo 'cc1'; // intégre
             $select->execute();
             $fetch = $select->fetch();
             // var_dump($count);
-        var_dump($password); 
-        var_dump($confirmPW);
+        // var_dump($password); 
+        // var_dump($confirmPW);
             if ($confirmPW==$password) {
+                echo "cc4";
                 $cryptedpass = password_hash($password, PASSWORD_BCRYPT); // CRYPTED 
                 var_dump($cryptedpass);
-                $utilisateur = $_SESSION['utilisateur']; 
-                $update = $this->db->prepare("UPDATE utilisateurs SET login = :login, password =:cryptedpass WHERE id =:myID"); 
-                $update->bindValue(":login", $login);
-                $update->bindValue(":password",$cryptedpass);
-                $update->bindValue(":myID", $_SESSION['utilisateur']['id']);
-
+                $update = ($this->db)->prepare("UPDATE utilisateurs SET login = :login, password = :cryptedpass, email= :mail WHERE id = :myID"); 
+                $update->bindParam(":login", $login, PDO::PARAM_STR);
+                $update->bindParam(":cryptedpass",$cryptedpass, PDO::PARAM_STR);
+                $update->bindParam(":myID", $_SESSION['utilisateur']['id'], PDO::PARAM_INT);
+                $update->bindParam(":mail",$email, PDO::PARAM_STR);
+                
                 var_dump($_SESSION['utilisateur']['id']);
                 $update->execute(); 
-
+            
             }
             else  $error_log="Confirmation du mot de passe incorrect"; 
             
@@ -171,7 +172,10 @@ function profile($login, $email, $password, $confirmPW){ echo 'cc1'; // intégre
         else $error_log = "Veuillez insérer au moins 5 caractères dans chaques champs"; 
     }
      else {$error_log = "veuillez remplir les champs";}
-    echo $error_log;
+     
+     {if (isset ($error_log)) {
+        return $error_log;
+    }}
 }
 }
 

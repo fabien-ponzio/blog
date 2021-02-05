@@ -1,8 +1,7 @@
 <?php
 $database = ("../functions/db.php"); 
 require_once('../class/user.php');
-$user = new User();
-
+$user=new user();
 
 session_start(); 
 ?>
@@ -33,8 +32,8 @@ session_start();
 // var_dump($_SESSION['utilisateur']); 
 // var_dump($_POST);
 
-if isset(($_POST['submit'])){
-    $user->profile();
+if (isset($_POST['submit'])){
+    $user->profile($_POST['newlogin'],$_POST['newMail'],$_POST['newpassword'],$_POST['confpassword']);
 
 }
 ?> 
