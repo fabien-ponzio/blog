@@ -1,7 +1,7 @@
 <?php
     require_once('../functions/db.php');
 
-    class article{
+    class Article{
         private $id;
         public $article;
         public $id_utilisateur
@@ -22,6 +22,7 @@
 // ----------------------------- Créé article --------------------------------------
 
         public function create($article, $id_utilisateur, $id_categorie, $date){
+            
 
 
         }
