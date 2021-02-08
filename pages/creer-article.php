@@ -1,6 +1,7 @@
 <?php 
-$database = ("../functions/db.php"); 
+include('../functions/db.php');
 require_once('../class/article.php');
+$database = ("../functions/db.php"); 
 ?>
 
 <!DOCTYPE html>
@@ -23,19 +24,29 @@ require_once('../class/article.php');
 
     <?php
         //querry pour selectionner les categorie dans la db 
-        $sql = "SELECT nom FROM categories"
-        $query = mysql_query($sql);
-        while($results[] = mysql_fetch_object($query));
-        array_pop($results);
+        
+
     ?>
         <label for="article">article</label>
         <input type="textarea" name="article">
 
-        <label for="categorie">categorie</label>
-        <input type="select" name="categorie">
-            <?php foreach($results as $option) :/*affichage des catgorie depuis la db */  ?> 
-                <option value="<?php echo $option->desired_value; ?>"><?php echo $option->desired_label; ?></option>
-            <?php endforeach; ?>
+        <label>categorie</label>
+            <select name="categorie">
+                <option>Select</option>
+            <?php
+                $db = mysqli_connect("localhost", "root", "", "blog");//co a la db pour la query
+                if(!$db){
+                    echo "failed to connect" . mysqli_connect_error();
+                }
+                $sql = "SELECT * FROM categories";
+                $result = mysqli_query($db, $sql);
+                //stockage des noms dans un tableau et et dans le select du formulaire 
+                while($row = mysqli_fetch_array($result)){
+                    echo '<option>'.$row['nom'] .'</option>';
+                }
+            ?>
+
+            </select>   
         <input type="submit" name="create" value="go!">
 
     </form>

@@ -4,9 +4,9 @@
     class article{
         private $id;
         public $article;
-        public $id_utilisateur
-        public $id_categorie
-        public $date
+        public $id_utilisateur;
+        public $id_categorie;
+        public $date;
 
         public function __construct(){
             $this->db = connect();
