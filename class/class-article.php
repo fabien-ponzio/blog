@@ -13,7 +13,7 @@
         }
 
 // ----------------------------- Anti injection sql --------------------------------------
-        function cleanQuerre($article){
+        function cleanQuery($article){
             if(get_magic_quotes_gpc())   // pas de duplicate backslashes
                 $article = stripslashes($article);
             return mysql_escape_string($article);
