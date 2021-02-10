@@ -12,6 +12,10 @@ require_once('../class/article.php');
  $path_articles="articles.php";
  $path_create="creer-article.php";
  $path_admin="admin.php";
+ $path_bouclier="bouclier.php";
+ $path_bouclierepee="bouclier-eppe.php";
+ $path_boucliermasse="bouclier-masse.php";
+ $path_double="double.php";
  // HEADER
  require_once('header.php');
 
