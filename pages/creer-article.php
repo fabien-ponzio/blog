@@ -1,8 +1,7 @@
 <?php 
-session_start(),
+session_start();
 include('../functions/db.php');
-require_once('../class/article.php');
-$database = ("../functions/db.php"); 
+require_once('../class/class-article.php');
 require_once('../class/user.php');
 
  // CHEMINS
@@ -53,16 +52,9 @@ require_once('../class/user.php');
             <select name="categorie">
                 <option>Select</option>
                     <?php
-                        $db = mysqli_connect("localhost", "root", "", "blog");//co a la db pour la query
-                        if(!$db){
-                            echo "failed to connect" . mysqli_connect_error();
-                        }
-                        $sql = "SELECT * FROM categories";
-                        $result = mysqli_query($db, $sql);
-                        //stockage des noms dans un tableau et et dans le select du formulaire 
-                        while($row = mysqli_fetch_array($result)){
-                            echo '<option>'.$row['nom'] .'</option>';
-                        }
+                      $article = new Article();
+                      $article->dropDownDisplay();
+
                     ?>
 
             </select>   

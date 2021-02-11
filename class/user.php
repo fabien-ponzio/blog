@@ -48,8 +48,8 @@ class User
                ]; 
                echo "coucou";
 
-            //    header('location:../pages/profil.php'); 
-            //    return $_SESSION['utilisateur']; 
+               header('location:../pages/profil.php'); 
+               
            } else {
             echo "Le login ou le mot de passe est erroné.";
         }
