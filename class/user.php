@@ -8,6 +8,7 @@ class User
     public $password;
     public $email;
     public $db;
+    private $id_droits;
 
     public function __construct()
     {
@@ -49,7 +50,7 @@ class User
                echo "coucou";
 
                header('location:../pages/profil.php'); 
-               
+
            } else {
             echo "Le login ou le mot de passe est erroné.";
         }
@@ -177,7 +178,37 @@ function profile($login, $email, $password, $confirmPW){ echo 'cc1'; // intégre
         return $error_log;
     }}
 }
+
+//----------------------------- MODDING USER ---------------------------->
+    
+    public function getUser(){
+        $i = 0;
+        $id = $_SESSION['id'];
+        $get = $this->db->prepare("SELECT * FROM utilisateurs");
+        $get->execute();
+
+        while($fetch = $get->fetch(PDO::FETCH_ASSOC)){
+            $tableau[$i][] = $fetch['id'];
+            $tableau[$i][] = $fetch['login'];
+            $i++;
+        }
+        return $tableau;
+    }
+    public function getDisplay(){
+        $login = $_SESSION['utilisateur'];
+        $id = $_SESSION['id'];
+        $display = new User();
+        $tableau = $display->getUser($id, $login);
+    foreach($tableau as $value){
+        echo '<option value="'.$value[0].'">'.$value[1] .'</option>';
+    }
+    }
+
+
+
+
+
+
 }
 
 ?>
-<!----------------------------- FIN UPDATE ---------------------------->
