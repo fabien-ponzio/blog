@@ -24,7 +24,9 @@
         public function create($article, $id_categorie){
             $temps = time();
             $today = date("Y-m-d H:i:s");
+            // on attrape la colonne id de la table utilisateur
             $id_utilisateur = $_SESSION['utilisateur']['id'];
+            // 
             $sql = "INSERT INTO articles (article, id_utilisateur, id_categorie, date) VALUES (:article, :id_utilisateur, :id_categorie, :date)";
             $result = $this->db->prepare($sql);
 
@@ -46,8 +48,10 @@
         $i = 0;
         $drop = $this->db->prepare("SELECT * FROM categories");
         $drop->execute();
-        //stockage des noms dans un tableau et et dans le select du formulaire 
+        //stockage des noms dans un tableau et dans le select du formulaire 
+        // TANT QUE 
         while($fetch = $drop->fetch(PDO::FETCH_ASSOC)){
+            // le crochets [] vides correspondent à un tableau vide dans lesquels on va insérer $fetch['id'] & $fetch['nom']
             $tableau[$i][] = $fetch['id'];
             $tableau[$i][] = $fetch['nom'];
             $i++;
@@ -57,7 +61,9 @@
     } 
 
         public function dropDownDisplay(){
+            // nouvel objet article qu'on stock dans la variable $modelArticle
             $modelArticle = new Article();
+            // on créée une variabe tableau dans laquelle on va appliquer la méthode dropdown à modelarticle 
             $tableau = $modelArticle->dropDown();
         foreach($tableau as $value){
         echo '<option value="'.$value[0].'">'.$value[1] .'</option>';
