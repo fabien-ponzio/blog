@@ -31,12 +31,12 @@ require_once('../class/classAdmin.php');
 <body>
     <?php
     if(isset($_POST['mod'])){
-        // $mod = new User();
-        // $mod->getDisplay();
+        $mod = new User();
+        $mod->getDisplay();
     }
-    ?>
-    <?php
-        <form action="" method="POST">
+    ?>  
+
+    <form action="" method="POST">
         <label>Select User</label>
 
             <select name="moddingUser">
@@ -51,18 +51,14 @@ require_once('../class/classAdmin.php');
             <select name="droitUser">
                 <option>Select</option>
                     <?php
-                    $droits = new Droits();
-                    $droits->displayChoice();
+                        $droits = new Droits();
+                        $droits->displayChoice();
                     ?>
             </select>   
 
         <input type="submit" name="mod" value="go!">
-
-    <form action="" method="POST" id="">
-    <label name="login">Login</label>
-    <input type="text" id="login" name="loginUpdate" value='".$tableau[0][0]."'>
-    <label name ></label>
     </form>
+
+    <h1>BONJOUR</h1>
 </body>
 </html>
-?>
