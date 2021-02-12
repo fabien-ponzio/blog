@@ -51,7 +51,6 @@
             $tableau[$i][] = $fetch['id'];
             $tableau[$i][] = $fetch['nom'];
             $i++;
-            //echo '<option>'.$fetch['nom'] .'</option>';
         }
         return $tableau;
     } 
@@ -61,11 +60,14 @@
             $tableau = $modelArticle->dropDown();
         foreach($tableau as $value){
         echo '<option value="'.$value[0].'">'.$value[1] .'</option>';
-        
         }
+        }
+// ----------------------------- Affichefr les articles --------------------------------------
+        public function getArticle(){    
+            $i = 0; 
+            $getstart = $this->db->prepare("SELECT * FROM articles"); 
 
         }
-
 }
 
 ?>
