@@ -2,6 +2,7 @@
 session_start();
 $database = ("../functions/db.php"); 
 require_once('../class/user.php');
+require_once('../class/classAdmin.php'); 
 
  // CHEMINS
  $path_index="../index.php";
@@ -30,20 +31,29 @@ require_once('../class/user.php');
 <body>
     <?php
     if(isset($_POST['mod'])){
-        $mod = new User();
-        $mod->getDisplay();
+        // $mod = new User();
+        // $mod->getDisplay();
     }
     ?>
         <form action="" method="POST">
         <label>Select User</label>
+
             <select name="moddingUser">
                 <option>Select</option>
+
                     <?php
                     $article = new User();
                     $article->getDisplay();
                     ?>
+
             </select>   
+
         <input type="submit" name="mod" value="go!">
 
+    <form action="" method="POST" id="">
+    <label name="login">Login</label>
+    <input type="text" id="login" name="loginUpdate" value='".$tableau[0][0]."'>
+    <label name ></label>
+    </form>
 </body>
 </html>

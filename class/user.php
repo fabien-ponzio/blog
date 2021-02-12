@@ -150,7 +150,7 @@ function profile($login, $email, $password, $confirmPW){ echo 'cc1'; // intégre
             $select->bindValue(":myID", $_SESSION['utilisateur']['id']);
             $select->execute();
             $fetch = $select->fetch();
-            // var_dump($count);
+        // var_dump($count);
         // var_dump($password); 
         // var_dump($confirmPW);
             if ($confirmPW==$password) {
@@ -204,7 +204,21 @@ function profile($login, $email, $password, $confirmPW){ echo 'cc1'; // intégre
     }
     }
 
+// ------------------------------------------------ UPDATE ID DROITS -------------------------------------------------------------
 
+public function updateRights($login, $id_droits){
+    
+    $query = $this->db->prepare ("UPDATE utilisateurs SET id_droits=:id WHERE login=:login"); 
+
+    $query->bindValue(":id", $id_droits, PDO::PARAM_INT); 
+    $query->bindValue(":login", $login, PDO::PARAM_STR); 
+
+    $query->execute();
+    var_dump($query); 
+
+
+
+}
 
 
 
