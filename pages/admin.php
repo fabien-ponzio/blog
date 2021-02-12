@@ -35,7 +35,7 @@ require_once('../class/class-droits.php');
         $mod->getDisplay();
     }
     ?>
-        <form action="" method="POST">
+    <form action="" method="POST">
         <label>Select User</label>
             <select name="moddingUser">
                 <option>Select</option>
@@ -53,6 +53,6 @@ require_once('../class/class-droits.php');
                     ?>
             </select>   
         <input type="submit" name="mod" value="go!">
-
+    </form>
 </body>
 </html>
