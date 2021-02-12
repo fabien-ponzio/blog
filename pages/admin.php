@@ -34,8 +34,7 @@ require_once('../class/classAdmin.php');
         $mod = new User();
         $mod->getDisplay();
     }
-    ?>  
-
+    ?>
     <form action="" method="POST">
         <label>Select User</label>
 
@@ -54,12 +53,8 @@ require_once('../class/classAdmin.php');
                         $droits = new Droits();
                         $droits->displayChoice();
                     ?>
-            </select> 
-
-            <input type="submit" name="mod" value="go!">
-
+            </select>   
+        <input type="submit" name="mod" value="go!">
     </form>
-
-    <h1>BONJOUR</h1>
 </body>
 </html>
