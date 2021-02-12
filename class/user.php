@@ -183,7 +183,7 @@ function profile($login, $email, $password, $confirmPW){ echo 'cc1'; // intégre
     
     public function getUser(){
         $i = 0;
-        $id = $_SESSION['id'];
+        //$id = $_SESSION['id'];
         $get = $this->db->prepare("SELECT * FROM utilisateurs");
         $get->execute();
 
@@ -195,15 +195,15 @@ function profile($login, $email, $password, $confirmPW){ echo 'cc1'; // intégre
         return $tableau;
     }
     public function getDisplay(){
-        $login = $_SESSION['utilisateur'];
-        $id = $_SESSION['id'];
+       // $login = $_SESSION['utilisateur'];
+       // $id = $_SESSION['id'];
         $display = new User();
-        $tableau = $display->getUser($id, $login);
+        $tableau = $display->getUser();
     foreach($tableau as $value){
         echo '<option value="'.$value[0].'">'.$value[1] .'</option>';
     }
     }
-
+    
 
 }
 

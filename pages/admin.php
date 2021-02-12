@@ -2,6 +2,7 @@
 session_start();
 $database = ("../functions/db.php"); 
 require_once('../class/user.php');
+require_once('../class/class-droits.php');
 
  // CHEMINS
  $path_index="../index.php";
@@ -41,6 +42,14 @@ require_once('../class/user.php');
                     <?php
                     $article = new User();
                     $article->getDisplay();
+                    ?>
+            </select>
+            <label>Select Droits</label>
+            <select name="droitUser">
+                <option>Select</option>
+                    <?php
+                    $droits = new Droits();
+                    $droits->displayChoice();
                     ?>
             </select>   
         <input type="submit" name="mod" value="go!">
