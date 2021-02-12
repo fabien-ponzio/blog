@@ -54,9 +54,10 @@ require_once('../class/classAdmin.php');
                         $droits = new Droits();
                         $droits->displayChoice();
                     ?>
-            </select>   
+            </select> 
 
-        <input type="submit" name="mod" value="go!">
+            <input type="submit" name="mod" value="go!">
+
     </form>
 
     <h1>BONJOUR</h1>
