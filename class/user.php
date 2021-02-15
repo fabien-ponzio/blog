@@ -207,7 +207,7 @@ function profile($login, $email, $password, $confirmPW){ echo 'cc1'; // intégre
     $update = $this->db->prepare("UPDATE utilisateurs SET id_droits = :id_droits WHERE id = :login");
     $update->bindParam(":login", $login, PDO::PARAM_STR);
     $update->bindParam(":id_droits", $id_droits, PDO::PARAM_INT);
-        var_dump($id_droits, $login);
+        var_dump($id_droits, $login);//DEBUG
     $update->execute();
     }
 
