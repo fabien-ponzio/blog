@@ -1,8 +1,9 @@
 <?php 
 session_start();
-$database = ("../functions/db.php"); 
+// $database = ("../functions/db.php");
 require_once('../class/user.php');
-require_once('../class/classAdmin.php'); 
+require_once('../class/classAdmin.php');
+require_once('../class/class-droits.php');
 
  // CHEMINS
  $path_index="../index.php";
@@ -31,8 +32,8 @@ require_once('../class/classAdmin.php');
 <body>
     <?php
     if(isset($_POST['mod'])){
-        $mod = new User();
-        $mod->getDisplay();
+        $droits = new User();
+        $droits->updateDroit($_POST['moddingUser'], $_POST['droitUser']);
     }
     ?>
     <form action="" method="POST">
@@ -53,25 +54,8 @@ require_once('../class/classAdmin.php');
                         $droits = new Droits();
                         $droits->displayChoice();
                     ?>
-            </select>   
+            </select>
         <input type="submit" name="mod" value="go!">
     </form>
 </body>
 </html>
-
-// ------------------------------------------------ UPDATE ID DROITS -------------------------------------------------------------
-<?php
-
-public function updateRights($login, $id_droits){
-    
-    $query = $this->db->prepare ("UPDATE utilisateurs SET id_droits=:id WHERE login=:login"); 
-
-    $query->bindValue(":id", $id_droits, PDO::PARAM_INT); 
-    $query->bindValue(":login", $login, PDO::PARAM_STR); 
-
-    $query->execute();
-    var_dump($query); 
-
-
-}
-?>
