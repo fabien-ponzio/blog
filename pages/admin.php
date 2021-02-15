@@ -60,18 +60,3 @@ require_once('../class/classAdmin.php');
 </html>
 
 // ------------------------------------------------ UPDATE ID DROITS -------------------------------------------------------------
-<?php
-
-public function updateRights($login, $id_droits){
-    
-    $query = $this->db->prepare ("UPDATE utilisateurs SET id_droits=:id WHERE login=:login"); 
-
-    $query->bindValue(":id", $id_droits, PDO::PARAM_INT); 
-    $query->bindValue(":login", $login, PDO::PARAM_STR); 
-
-    $query->execute();
-    var_dump($query); 
-
-
-}
-?>

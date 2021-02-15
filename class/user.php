@@ -208,6 +208,8 @@ function profile($login, $email, $password, $confirmPW){ echo 'cc1'; // intégre
 
 
 
+
+    
 }
 
 ?>
