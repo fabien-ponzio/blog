@@ -38,7 +38,7 @@ require_once('../class/class-droits.php');
         $update->UpdateNewUser($_POST['moddingUser'], $_POST['UpdateLog'],$_POST['UpdateMail'], $_POST['updatePW'], $_POST['updateCPW']);
     }
     if (isset($_POST['createUser'])) {
-        $NewUser = new Admin(); 
+        $NewUser = new Admin();
         $NewUser->registerNewUser($_POST['createLogin'], $_POST['eMail'], $_POST['createPW'], $_POST['confirmPW'], $_POST['droitNewUser']); 
     }
     ?>
