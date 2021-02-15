@@ -2,7 +2,7 @@
 require_once('../functions/db.php');
 
 class Droits{
-    private $id; 
+    private $id;
     public $nom;
 
     public function __construct(){
@@ -17,15 +17,14 @@ class Droits{
             $tableau[$i][] = $fetch['nom'];
             $i++;
         }
-        return $tableau;  
-    } 
+        return $tableau;
+    }
     public function displayChoice(){
         $modelDroit = new Droits;
         $tableau = $modelDroit->getChoice();
         foreach($tableau as $value){
             echo '<option value="'.$value[0].'">'.$value[1] .'</option>';
         }
-        
     }
 }
 
