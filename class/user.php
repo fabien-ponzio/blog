@@ -180,7 +180,7 @@ function profile($login, $email, $password, $confirmPW){ echo 'cc1'; // intégre
 }
 
 //----------------------------- MODDING USER ---------------------------->
-    
+
     public function getUser(){
         $i = 0;
         //$id = $_SESSION['id'];
@@ -194,14 +194,21 @@ function profile($login, $email, $password, $confirmPW){ echo 'cc1'; // intégre
         }
         return $tableau;
     }
+
     public function getDisplay(){
-       // $login = $_SESSION['utilisateur'];
-       // $id = $_SESSION['id'];
         $display = new User();
         $tableau = $display->getUser();
-    foreach($tableau as $value){
-        echo '<option value="'.$value[0].'">'.$value[1] .'</option>';
+        foreach($tableau as $value){
+            echo '<option value="' . $value[0] . '">' . $value[1] . '</option>';
+        }
     }
+
+    public function updateDroit($login, $id_droits){
+    $update = $this->db->prepare("UPDATE utilisateurs SET id_droits = :id_droits WHERE id = :login");
+    $update->bindParam(":login", $login, PDO::PARAM_STR);
+    $update->bindParam(":id_droits", $id_droits, PDO::PARAM_INT);
+        var_dump($id_droits, $login);
+    $update->execute();
     }
 
 
