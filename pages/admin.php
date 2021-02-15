@@ -34,8 +34,8 @@ require_once('../class/class-droits.php');
     if(isset($_POST['mod'])){
         $droits = new User();
         $droits->updateDroit($_POST['moddingUser'], $_POST['droitUser']);
-        $update = new Admin(); 
-        $update->UpdateNewUser($_POST['UpdateLog'],$_POST['UpdateMail'], $_POST['updatePW'], $_POST['updateCPW']);
+        $update = new Admin();
+        $update->UpdateNewUser($_POST['moddingUser'], $_POST['UpdateLog'],$_POST['UpdateMail'], $_POST['updatePW'], $_POST['updateCPW']);
     }
     if (isset($_POST['createUser'])) {
         $NewUser = new Admin(); 
@@ -45,36 +45,36 @@ require_once('../class/class-droits.php');
     <form action="" method="POST">
         <label>Update User</label>
 
-            <select name="moddingUser">
-                <option>Select</option>
+        <select name="moddingUser">
+            <option>Select</option>
 
-                    <?php
-                    $article = new User();
-                    $article->getDisplay();
-                    ?>
-            </select>
+                <?php
+                $article = new User();
+                $article->getDisplay();
+                ?>
+        </select>
 
-                <label for="UpdateLog">Changez le nv pseudo</label>
-                <input type="text" name="UpdateLog">
+        <label for="UpdateLog">Changez le nv pseudo</label>
+        <input type="text" name="UpdateLog">
 
-                <label for="UpdateMail">E-Mail:</label>
-                <input type="eMail" name="UpdateMail">
+        <label for="UpdateMail">E-Mail:</label>
+        <input type="eMail" name="UpdateMail">
 
-                <label for="updatePW">Nouveau mot de passe:</label>
-                <input type="password" name="updatePW">
+        <label for="updatePW">Nouveau mot de passe:</label>
+        <input type="password" name="updatePW">
 
-                <label for="updateCPW">Confirmez le mot de passe: </label>
-                <input type="password" name="updateCPW">
+        <label for="updateCPW">Confirmez le mot de passe: </label>
+        <input type="password" name="updateCPW">
 
-                <label>Select Droits</label>
-                <select name="droitUser">
-                    <option>Select</option>
-                        <?php
-                            $droits = new Droits();
-                            $droits->displayChoice();
-                        ?>
-                </select>
-            <input type="submit" name="mod" value="go!">
+        <label>Select Droits</label>
+        <select name="droitUser">
+            <option>Select</option>
+                <?php
+                    $droits = new Droits();
+                    $droits->displayChoice();
+                ?>
+        </select>
+        <input type="submit" name="mod" value="go!">
     </form>
 
     <form action="" method=POST>
@@ -96,7 +96,7 @@ require_once('../class/class-droits.php');
                 $droits->displayChoice();
             ?>
     </select>
-    <input type="submit" name="createUser">            
+    <input type="submit" name="createUser">
 
     </form>
 </body>
