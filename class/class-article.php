@@ -24,9 +24,7 @@
         public function create($article, $id_categorie){
             $temps = time();
             $today = date("Y-m-d H:i:s");
-            // on attrape la colonne id de la table utilisateur
             $id_utilisateur = $_SESSION['utilisateur']['id'];
-            // 
             $sql = "INSERT INTO articles (article, id_utilisateur, id_categorie, date) VALUES (:article, :id_utilisateur, :id_categorie, :date)";
             $result = $this->db->prepare($sql);
 
@@ -36,12 +34,9 @@
             $result->bindValue(":date", $today, PDO::PARAM_STR);
 
             $result->execute();
-            
             return $result;
-            
 
         }
-    
 // ----------------------------- Créé article menu deroulant --------------------------------------
     public function dropDown(){
 
@@ -67,12 +62,6 @@
         foreach($tableau as $value){
         echo '<option value="'.$value[0].'">'.$value[1] .'</option>';
         }
-        }
-// ----------------------------- Affichefr les articles --------------------------------------
-        public function getArticle(){    
-            $i = 0; 
-            $getstart = $this->db->prepare("SELECT * FROM articles"); 
-
         }
 }
 
