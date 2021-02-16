@@ -68,12 +68,16 @@
         echo '<option value="'.$value[0].'">'.$value[1] .'</option>';
         }
         }
-// ----------------------------- Affichefr les articles --------------------------------------
-        public function getArticle(){    
-            $i = 0; 
-            $getstart = $this->db->prepare("SELECT * FROM articles"); 
+// ----------------------------- Afficher les articles --------------------------------------
+        public function displayArticle(){
 
+            $article=$this->db->prepare("SELECT u.login, a.article, a.id_utilisateur, a.id_categorie, a.date FROM articles AS a INNER JOIN utilisateurs AS u WHERE a.id_utilisateur=u.id ORDER BY a.date DESC LIMIT 5"); 
+            $article->execute(); 
+            $result=$article->fetch(PDO::FETCH_ASSOC); 
+            var_dump($result); 
+
+            
         }
-}
+    }
 
 ?>
