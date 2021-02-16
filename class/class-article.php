@@ -70,13 +70,24 @@
         }
 // ----------------------------- Afficher les articles --------------------------------------
         public function displayArticle(){
-
-            $article=$this->db->prepare("SELECT u.login, a.article, a.id_utilisateur, a.id_categorie, a.date FROM articles AS a INNER JOIN utilisateurs AS u WHERE a.id_utilisateur=u.id ORDER BY a.date DESC LIMIT 5"); 
-            $article->execute(); 
-            $result=$article->fetch(PDO::FETCH_ASSOC); 
-            var_dump($result); 
-
-            
+            echo "<table>";
+            $article=$this->db->prepare(
+                "SELECT u.login, a.article, a.id_utilisateur, a.id_categorie, a.date, c.nom
+                FROM articles a INNER JOIN utilisateurs u ON a.id_utilisateur=u.id
+                INNER JOIN categories c ON a.id_categorie = c.id  ORDER BY a.date DESC LIMIT 5");
+            $article->execute();
+            $result = $article->fetchAll(PDO::FETCH_ASSOC);
+            var_dump($result);
+            for ($i = 0; $i < count($result); $i++) {
+                echo "<tr>
+                            <td>" . $result[$i]['login'] . "</td>
+                            <td>" . $result[$i]['article'] . "</td>
+                            <td>" . $result[$i]['id_utilisateur'] . "</td>
+                            <td>" . $result[$i]['nom'] . "</td>
+                            <td>" . $result[$i]['date'] . "</td>
+                </tr>";
+            }
+        echo "</table>";
         }
     }
 
