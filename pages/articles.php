@@ -1,7 +1,8 @@
 <?php 
 
 $database = ("../functions/db.php"); 
-require_once('../class/user.php');
+require_once("../class/user.php");
+require_once("../class/class-article.php"); 
 
  // CHEMINS
  $path_index="../index.php";
@@ -17,17 +18,6 @@ require_once('../class/user.php');
  $path_double="double.php";
  // HEADER
  require_once('header.php');
-
+$NewArticle = new Article;
+$NewArticle->displayArticle();
 ?>
-
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-
-</body>
-</html>
