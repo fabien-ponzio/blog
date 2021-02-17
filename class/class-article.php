@@ -68,8 +68,10 @@
         echo '<option value="'.$value[0].'">'.$value[1] .'</option>';
         }
         }
+
 // ----------------------------- Afficher les articles --------------------------------------
         public function displayArticle(){
+
             echo "<table>";
             $article=$this->db->prepare(
                 "SELECT u.login, a.article, a.id_utilisateur, a.id_categorie, a.date, c.nom
@@ -89,6 +91,6 @@
             }
         echo "</table>";
         }
-    }
 
+}
 ?>
