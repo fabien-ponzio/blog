@@ -21,7 +21,7 @@ class User
     {
     // On prépare la requête, on l'execute puis on fait un fetch pour récupérer les infos
         $ConnectUser = $this->db->prepare("SELECT * FROM utilisateurs WHERE login = :login"); 
-        $ConnectUser->bindparam(':login', $login, PDO::PARAM_STR); 
+        $ConnectUser->bindValue(':login', $login, PDO::PARAM_STR); 
         $ConnectUser->execute();
         $user = $ConnectUser->fetch(PDO::FETCH_ASSOC); 
     // si le fetch récupère quelque chose, alors :
@@ -159,10 +159,10 @@ function profile($login, $email, $password, $confirmPW){ echo 'cc1'; // intégre
                 $cryptedpass = password_hash($password, PASSWORD_BCRYPT); // CRYPTED 
                 var_dump($cryptedpass);
                 $update = ($this->db)->prepare("UPDATE utilisateurs SET login = :login, password = :cryptedpass, email= :mail WHERE id = :myID"); 
-                $update->bindParam(":login", $login, PDO::PARAM_STR);
-                $update->bindParam(":cryptedpass",$cryptedpass, PDO::PARAM_STR);
-                $update->bindParam(":myID", $_SESSION['utilisateur']['id'], PDO::PARAM_INT);
-                $update->bindParam(":mail",$email, PDO::PARAM_STR);
+                $update->bindValue(":login", $login, PDO::PARAM_STR);
+                $update->bindValue(":cryptedpass",$cryptedpass, PDO::PARAM_STR);
+                $update->bindValue(":myID", $_SESSION['utilisateur']['id'], PDO::PARAM_INT);
+                $update->bindValue(":mail",$email, PDO::PARAM_STR);
                 
                 var_dump($_SESSION['utilisateur']['id']);
                 $update->execute(); 
@@ -206,9 +206,9 @@ function profile($login, $email, $password, $confirmPW){ echo 'cc1'; // intégre
 
     public function updateDroit($login, $id_droits){
     $update = $this->db->prepare("UPDATE utilisateurs SET id_droits = :id_droits WHERE id = :login");
-    $update->bindParam(":login", $login, PDO::PARAM_STR);
-    $update->bindParam(":id_droits", $id_droits, PDO::PARAM_INT);
-        var_dump($id_droits, $login);
+    $update->bindValue(":login", $login, PDO::PARAM_STR);
+    $update->bindValue(":id_droits", $id_droits, PDO::PARAM_INT);
+        var_dump($id_droits, $login);//DEBUG
     $update->execute();
     }
 

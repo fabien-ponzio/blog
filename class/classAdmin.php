@@ -87,51 +87,78 @@ class Admin{
 //-------------------------------------- UPDATE USER DEPUIS ADMIN.PHP -----------------------------------------------//
     public function UpdateNewUser($old_login, $login, $email, $password, $confirmPW){
 
-    $login =  htmlspecialchars(trim($login));
-    $email = htmlspecialchars(trim($email));
-    $password =  htmlspecialchars(trim($password));
-    $confirmPW =  htmlspecialchars(trim($confirmPW));
+        $login =  htmlspecialchars(trim($login));
+        $email = htmlspecialchars(trim($email));
+        $password =  htmlspecialchars(trim($password));
+        $confirmPW =  htmlspecialchars(trim($confirmPW));
 
-    if (!empty($login) && !empty($email) && !empty($password) && !empty($confirmPW)){
-       $logLength = strlen($login);
-       $passLength = strlen($password);
-       $confirmLength = strlen($confirmPW);
-       $mailLength = strlen($email);
+        if (!empty($login) && !empty($email) && !empty($password) && !empty($confirmPW)){
+            $logLength = strlen($login);
+            $passLength = strlen($password);
+            $confirmLength = strlen($confirmPW);
+            $mailLength = strlen($email);
 
-       if (($logLength >=5) && ($passLength >=5) && ($logLength >=5) && ($logLength >=5)) {
-           $select = $this->db->prepare("SELECT * FROM utilisateurs WHERE login = :login");
-           $select->bindValue(":login", $old_login);
-           $select->execute();
-           $fetch = $select->fetch();
+            if (($logLength >=5) && ($passLength >=5) && ($logLength >=5) && ($logLength >=5)) {
+                $select = $this->db->prepare("SELECT * FROM utilisateurs WHERE login = :login");
+                $select->bindValue(":login", $old_login);
+                $select->execute();
+                $fetch = $select->fetch();
 
-           var_dump($old_login);
+                var_dump($old_login);
 
-           if ($confirmPW==$password) {
-               $cryptedpass = password_hash($password, PASSWORD_BCRYPT);
-               $update = ($this->db)->prepare("UPDATE utilisateurs SET login = :login, password = :cryptedpass, email= :mail WHERE id = :old_login");
-               $update->bindParam(":old_login", $old_login, PDO::PARAM_INT);
-               $update->bindParam(":login", $login, PDO::PARAM_STR);
-               $update->bindParam(":cryptedpass",$cryptedpass, PDO::PARAM_STR);
-               $update->bindParam(":mail",$email, PDO::PARAM_STR);
-               var_dump($login);
-               $update->execute();
-           }
-           else  $error_log="Confirmation du mot de passe incorrect";
-       }
-       else $error_log = "Veuillez insérer au moins 5 caractères dans chaques champs";
-   }
-    else {$error_log = "veuillez remplir les champs";}
-    {if (isset ($error_log)) {
-       return $error_log;
-   }}
-}
-//---------------------------- DELETE USER DEPUIS ADMIN.PHP ---------------------------------------//
+                if ($confirmPW==$password) {
+                    $cryptedpass = password_hash($password, PASSWORD_BCRYPT);
+                    $update = ($this->db)->prepare("UPDATE utilisateurs SET login = :login, password = :cryptedpass, email= :mail WHERE id = :old_login");
+                    $update->bindParam(":old_login", $old_login, PDO::PARAM_INT);
+                    $update->bindParam(":login", $login, PDO::PARAM_STR);
+                    $update->bindParam(":cryptedpass",$cryptedpass, PDO::PARAM_STR);
+                    $update->bindParam(":mail",$email, PDO::PARAM_STR);
+                    var_dump($login);
+                    $update->execute();
+                }
+                else  $error_log="Confirmation du mot de passe incorrect";
+            }
+            else $error_log = "Veuillez insérer au moins 5 caractères dans chaques champs";
+        }
+        else {
+            $error_log = "veuillez remplir les champs";
+        }
+        if (isset ($error_log)) {
+            return $error_log;
+        }
+    }
 
-public function deleteUser($login){
-    $deleteQuery = $this->db->prepare("DELETE FROM utilisateurs WHERE id = :login");
-    $deleteQuery->bindValue(":login", $login, PDO::PARAM_INT); 
-    $deleteQuery->execute(); 
-} 
+    public function getArticles()
+    {
+
+        $i = 0;
+        $drop = $this->db->prepare("SELECT * FROM articles");
+        $drop->execute();
+        //stockage des noms dans un tableau et dans le select du formulaire
+        // TANT QUE
+        while ($fetch = $drop->fetch(PDO::FETCH_ASSOC)) {
+            // le crochets [] vides correspondent à un tableau vide dans lesquels on va insérer $fetch['id'] & $fetch['nom']
+            $tableau[$i][] = $fetch['id'];
+            $tableau[$i][] = $fetch['Titre'];
+            $i++;
+        }
+        return $tableau;
+    }
+
+    public function getDisplay()
+    {
+        $display = new Admin();
+        $tableau = $display->getArticles();
+        foreach ($tableau as $value) {
+            echo '<option value="' . $value[0] . '">' . $value[1] . '</option>';
+        }
+    }
+
+    public function deleteArticle($titre){
+        $delete = $this->db->prepare("DELETE FROM Articles WHERE id = :titre");
+        $delete->bindValue(":titre", $titre, PDO::PARAM_STR);
+        $delete->execute();
+    }
 
 // ------------------------------------- TABLEAU ADMIN -----------------------------------------// 
 
@@ -171,6 +198,15 @@ public function userTable() {
 
 }
 
+
+
+    public function deleteUser($login)
+    {
+
+        $deleteQuery = $this->db->prepare("DELETE FROM utilisateurs WHERE id = :login");
+        $deleteQuery->bindValue(":login", $login, PDO::PARAM_INT);
+        $deleteQuery->execute();
+    } 
 }
 
 ?>
