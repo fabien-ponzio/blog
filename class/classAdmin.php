@@ -124,6 +124,13 @@ class Admin{
        return $error_log;
    }}
 }
+        //---------------------------- DELETE USER ---------------------------------------//
+public function deleteUser($login){
 
+    $deleteQuery = $this->db->prepare("DELETE FROM utilisateurs WHERE id = :login");
+    $deleteQuery->bindValue(":login", $login, PDO::PARAM_INT); 
+    $deleteQuery->execute(); 
+
+} 
 }
 ?>

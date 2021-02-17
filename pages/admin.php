@@ -41,6 +41,10 @@ require_once('../class/class-droits.php');
         $NewUser = new Admin(); 
         $NewUser->registerNewUser($_POST['createLogin'], $_POST['eMail'], $_POST['createPW'], $_POST['confirmPW'], $_POST['droitNewUser']); 
     }
+    if (isset($_POST['deleteUser'])) {
+        $delete = new Admin();
+        $delete->deleteUser($_POST['moddingUser']); 
+    }
     ?>
     <form action="" method="POST">
         <label>Update User</label>
@@ -52,6 +56,7 @@ require_once('../class/class-droits.php');
                 $article = new User();
                 $article->getDisplay();
                 ?>
+
         </select>
 
         <label for="UpdateLog">Changez le nv pseudo</label>
@@ -75,6 +80,7 @@ require_once('../class/class-droits.php');
                 ?>
         </select>
         <input type="submit" name="mod" value="go!">
+        <input type="submit" name="deleteUser" value="supprimew">
     </form>
 
     <form action="" method=POST>
@@ -97,7 +103,6 @@ require_once('../class/class-droits.php');
             ?>
     </select>
     <input type="submit" name="createUser">
-
     </form>
 </body>
 </html>
