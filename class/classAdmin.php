@@ -133,5 +133,44 @@ public function deleteUser($login){
     $deleteQuery->execute(); 
 } 
 
+// ------------------------------------- TABLEAU ADMIN -----------------------------------------// 
+
+public function userTable() {
+    $tableUser = $this->db->query("SELECT d.nom, u.login, u.id_droits, d.id FROM droits d INNER JOIN utilisateurs u WHERE u.id_droits = 1337"); 
+    // SI PAS DE VARIABLE = PAS DE bindValue 
+    $result = $tableUser->fetchAll(PDO::FETCH_ASSOC);
+    echo"<table> <th> Admin </th>"; 
+    for ($i=0; $i < count($result) ; $i++) {       
+      echo"<tr>
+      <td>" . $result[$i]['login'] . "</td>
+        </tr>";
+    }
+    echo"</table>"; 
+    $tableUser = $this->db->query("SELECT d.nom, u.login, u.id_droits, d.id FROM droits d INNER JOIN utilisateurs u WHERE u.id_droits = 1"); 
+    // SI PAS DE VARIABLE = PAS DE bindValue 
+    $result = $tableUser->fetchAll(PDO::FETCH_ASSOC);
+    echo"<table> <th> Utilisateur </th>"; 
+    
+    for ($i=0; $i < count($result) ; $i++) {       
+      echo"<tr>
+      <td>" . $result[$i]['login'] . "</td>
+        </tr>";
+    }
+    echo"</table>"; 
+    
+    $tableUser = $this->db->query("SELECT d.nom, u.login, u.id_droits, d.id FROM droits d INNER JOIN utilisateurs u WHERE u.id_droits = 42"); 
+    // SI PAS DE VARIABLE = PAS DE bindValue 
+    $result = $tableUser->fetchAll(PDO::FETCH_ASSOC);
+    echo"<table><th> Modérateur </th>"; 
+    for ($i=0; $i < count($result) ; $i++) {       
+      echo"<tr>
+      <td>" . $result[$i]['login'] . "</td>
+        </tr>";
+    }
+    echo"</table>"; 
+
 }
+
+}
+
 ?>

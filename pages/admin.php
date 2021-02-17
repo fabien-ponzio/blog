@@ -113,4 +113,6 @@ require_once('../class/class-droits.php');
     </form>
 </body>
 </html>
-<?php } ?>  
+<?php $tableDroits = new Admin;
+        $tableDroits->userTable();
+} ?>  
