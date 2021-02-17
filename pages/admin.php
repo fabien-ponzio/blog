@@ -20,8 +20,8 @@ require_once('../class/class-droits.php');
  $path_double="double.php";
  // HEADER
  require_once('header.php');
- if ($_SESSION['id_droits'] != 1337) {
-    echo"Cette page est accessible qu'aux administrateurs"; 
+ if (!isset($_SESSION['id_droits']) OR $_SESSION['id_droits'] != 1337) {
+    echo"Cette page est accessible qu'aux administrateurs";
  }
  else {
 
