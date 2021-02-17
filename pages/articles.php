@@ -19,5 +19,6 @@ require_once("../class/class-article.php");
  // HEADER
  require_once('header.php');
 $NewArticle = new Article;
-$NewArticle->displayArticle();
+// $NewArticle->displayArticle();
+$NewArticle->articlepage();
 ?>

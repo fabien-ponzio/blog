@@ -1,5 +1,6 @@
-<?php 
+<?php
 session_start();
+
 // $database = ("../functions/db.php");
 require_once('../class/user.php');
 require_once('../class/classAdmin.php');
@@ -21,27 +22,40 @@ require_once('../class/class-article.php');
  $path_double="double.php";
  // HEADER
  require_once('header.php');
+ if (!isset($_SESSION['id_droits']) OR $_SESSION['id_droits'] != 1337) {
+    echo"Cette page est accessible qu'aux administrateurs";
+ }
+ else {
+
 
 ?>
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin</title>
 </head>
+
 <body>
     <?php
+
     if(isset($_POST['mod'])){
         $droits = new User();
         $droits->updateDroit($_POST['moddingUser'], $_POST['droitUser']);
         $update = new Admin();
-        $update->UpdateNewUser($_POST['moddingUser'], $_POST['UpdateLog'],$_POST['UpdateMail'], $_POST['updatePW'], $_POST['updateCPW']);
+        $update->UpdateNewUser($_POST['moddingUser'], $_POST['UpdateLog'], $_POST['UpdateMail'], $_POST['updatePW'], $_POST['updateCPW']);
     }
     if (isset($_POST['createUser'])) {
-        $NewUser = new Admin(); 
-        $NewUser->registerNewUser($_POST['createLogin'], $_POST['eMail'], $_POST['createPW'], $_POST['confirmPW'], $_POST['droitNewUser']); 
+        $NewUser = new Admin();
+        $NewUser->registerNewUser($_POST['createLogin'], $_POST['eMail'], $_POST['createPW'], $_POST['confirmPW'], $_POST['droitNewUser']);
+    }
+
+    if (isset($_POST['deleteArticle'])){
+        $deleteArticles = new Admin;
+        $deleteArticles->deleteArticle($_POST['titreArticles']);
     }
     if (isset($_POST['deleteUser'])) {
         $delete = new Admin();
@@ -62,17 +76,17 @@ require_once('../class/class-article.php');
     
 
     ?>
+    <h1>Modification de User</h1>
     <form action="" method="POST">
         <label>Update User</label>
 
         <select name="moddingUser">
             <option>Select</option>
 
-                <?php
-                $article = new User();
-                $article->getDisplay();
-                ?>
-
+            <?php
+            $article = new User();
+            $article->getDisplay();
+            ?>
         </select>
 
             <label for="UpdateLog">Changez le nv pseudo</label>
@@ -90,15 +104,16 @@ require_once('../class/class-article.php');
             <label>Select Droits</label>
         <select name="droitUser">
             <option>Select</option>
-                <?php
-                    $droits = new Droits();
-                    $droits->displayChoice();
-                ?>
+            <?php
+            $droits = new Droits();
+            $droits->displayChoice();
+            ?>
         </select>
         <input type="submit" name="mod" value="go!">
         <input type="submit" name="deleteUser" value="supprimew">
     </form>
 
+    <h1>Creation d'Utilisateur</h1>
     <form action="" method=POST>
 
         <label for="createLogin">Nouveau Login:</label>
@@ -110,15 +125,29 @@ require_once('../class/class-article.php');
         <label for="ConfirmPW">Confirmez le mot de passe: </label>
         <input type="password" name="confirmPW">
 
-    <label>Select Droits</label>
-    <select name="droitNewUser">
-        <option>Select</option>
+        <label>Select Droits</label>
+        <select name="droitNewUser">
+            <option>Select</option>
             <?php
-                $droits = new Droits();
-                $droits->displayChoice();
+            $droits = new Droits();
+            $droits->displayChoice();
             ?>
-    </select>
-    <input type="submit" name="createUser">
+        </select>
+        <input type="submit" name="createUser">
+
+    </form>
+
+    <h1>Modification Article</h1>
+    <form action="" method="POST">
+        <label for="">Select Articles</label>
+        <select name="titreArticles">
+            <option>Select</option>
+            <?php
+                $articles = new Admin();
+                $articles->getDisplay();
+            ?>
+        </select>
+        <input type="submit" value="Delete" name="deleteArticle">
     </form>
 
     <form action="" method="POST">
@@ -153,3 +182,4 @@ require_once('../class/class-article.php');
     </form>
 </body>
 </html>
+<?php } ?>  
