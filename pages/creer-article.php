@@ -35,15 +35,16 @@ require_once('../class/user.php');
 // public function create($article, $id_utilisateur, $id_categorie, $date) 
     if(isset($_POST['create'])){
         $article = new Article();
-        $article->create($_POST['article'], $_POST['categorie']);
+        $article->create($_POST['titre'],$_POST['article'], $_POST['categorie']);
     }
 
 
-    
 
 ?>
 
     <form action="" method="POST">
+        <label for="Titre">Titre</label>
+        <input type="text" name="titre">
 
         <label for="article">article</label>
         <textarea name="article" placeholder="Type article here"></textarea>
