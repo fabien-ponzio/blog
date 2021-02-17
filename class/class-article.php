@@ -43,8 +43,8 @@
         $i = 0;
         $drop = $this->db->prepare("SELECT * FROM categories");
         $drop->execute();
-        //stockage des noms dans un tableau et dans le select du formulaire 
-        // TANT QUE 
+        //stockage des noms dans un tableau et dans le select du formulaire
+        // TANT QUE
         while($fetch = $drop->fetch(PDO::FETCH_ASSOC)){
             // le crochets [] vides correspondent à un tableau vide dans lesquels on va insérer $fetch['id'] & $fetch['nom']
             $tableau[$i][] = $fetch['id'];
@@ -52,38 +52,7 @@
             $i++;
         }
         return $tableau;
-    } 
-
-//         public function dropDownDisplay(){
-//             // nouvel objet article qu'on stock dans la variable $modelArticle
-//             $modelArticle = new Article();
-//             // on créée une variabe tableau dans laquelle on va appliquer la méthode dropdown à modelarticle 
-//             $tableau = $modelArticle->dropDown();
-//         foreach($tableau as $value){
-//         echo '<option value="'.$value[0].'">'.$value[1] .'</option>';
-//         }
-//         }
-// // ----------------------------- Afficher les articles --------------------------------------
-//         public function displayArticle(){
-//             echo "<table>";
-//             $article=$this->db->prepare(
-//                 "SELECT u.login, a.article, a.id_utilisateur, a.id_categorie, a.date, c.nom
-//                 FROM articles a INNER JOIN utilisateurs u ON a.id_utilisateur=u.id
-//                 INNER JOIN categories c ON a.id_categorie = c.id  ORDER BY a.date DESC LIMIT 5");
-//             $article->execute();
-//             $result = $article->fetchAll(PDO::FETCH_ASSOC);
-//             var_dump($result);
-//             for ($i = 0; $i < count($result); $i++) {
-//                 echo "<tr>
-//                             <td>" . $result[$i]['login'] . "</td>
-//                             <td>" . $result[$i]['article'] . "</td>
-//                             <td>" . $result[$i]['id_utilisateur'] . "</td>
-//                             <td>" . $result[$i]['nom'] . "</td>
-//                             <td>" . $result[$i]['date'] . "</td>
-//                 </tr>";
-//             }
-//         echo "</table>";
-//         }
+    }
 
         public function articlepage(){
             $total = $this->db->query("SELECT COUNT(*) FROM articles")->fetchColumn();

@@ -86,44 +86,85 @@ class Admin{
 
     public function UpdateNewUser($old_login, $login, $email, $password, $confirmPW){
 
-    $login =  htmlspecialchars(trim($login));
-    $email = htmlspecialchars(trim($email));
-    $password =  htmlspecialchars(trim($password));
-    $confirmPW =  htmlspecialchars(trim($confirmPW));
+        $login =  htmlspecialchars(trim($login));
+        $email = htmlspecialchars(trim($email));
+        $password =  htmlspecialchars(trim($password));
+        $confirmPW =  htmlspecialchars(trim($confirmPW));
 
-    if (!empty($login) && !empty($email) && !empty($password) && !empty($confirmPW)){
-       $logLength = strlen($login);
-       $passLength = strlen($password);
-       $confirmLength = strlen($confirmPW);
-       $mailLength = strlen($email);
+        if (!empty($login) && !empty($email) && !empty($password) && !empty($confirmPW)){
+            $logLength = strlen($login);
+            $passLength = strlen($password);
+            $confirmLength = strlen($confirmPW);
+            $mailLength = strlen($email);
 
-       if (($logLength >=5) && ($passLength >=5) && ($logLength >=5) && ($logLength >=5)) {
-           $select = $this->db->prepare("SELECT * FROM utilisateurs WHERE login = :login");
-           $select->bindValue(":login", $old_login);
-           $select->execute();
-           $fetch = $select->fetch();
+            if (($logLength >=5) && ($passLength >=5) && ($logLength >=5) && ($logLength >=5)) {
+                $select = $this->db->prepare("SELECT * FROM utilisateurs WHERE login = :login");
+                $select->bindValue(":login", $old_login);
+                $select->execute();
+                $fetch = $select->fetch();
 
-           var_dump($old_login);
+                var_dump($old_login);
 
-           if ($confirmPW==$password) {
-               $cryptedpass = password_hash($password, PASSWORD_BCRYPT);
-               $update = ($this->db)->prepare("UPDATE utilisateurs SET login = :login, password = :cryptedpass, email= :mail WHERE id = :old_login");
-               $update->bindParam(":old_login", $old_login, PDO::PARAM_INT);
-               $update->bindParam(":login", $login, PDO::PARAM_STR);
-               $update->bindParam(":cryptedpass",$cryptedpass, PDO::PARAM_STR);
-               $update->bindParam(":mail",$email, PDO::PARAM_STR);
-               var_dump($login);
-               $update->execute();
-           }
-           else  $error_log="Confirmation du mot de passe incorrect";
-       }
-       else $error_log = "Veuillez insérer au moins 5 caractères dans chaques champs";
-   }
-    else {$error_log = "veuillez remplir les champs";}
-    {if (isset ($error_log)) {
-       return $error_log;
-   }}
+                if ($confirmPW==$password) {
+                    $cryptedpass = password_hash($password, PASSWORD_BCRYPT);
+                    $update = ($this->db)->prepare("UPDATE utilisateurs SET login = :login, password = :cryptedpass, email= :mail WHERE id = :old_login");
+                    $update->bindParam(":old_login", $old_login, PDO::PARAM_INT);
+                    $update->bindParam(":login", $login, PDO::PARAM_STR);
+                    $update->bindParam(":cryptedpass",$cryptedpass, PDO::PARAM_STR);
+                    $update->bindParam(":mail",$email, PDO::PARAM_STR);
+                    var_dump($login);
+                    $update->execute();
+                }
+                else  $error_log="Confirmation du mot de passe incorrect";
+            }
+            else $error_log = "Veuillez insérer au moins 5 caractères dans chaques champs";
+        }
+        else {
+            $error_log = "veuillez remplir les champs";
+        }
+        if (isset ($error_log)) {
+            return $error_log;
+        }
+    }
+
+    public function Delete_articles(){
+
+        $article = $this->db->prepare(
+            "SELECT u.login, a.article, a.id, a.id_utilisateur, a.id_categorie, a.date, c.nom
+                    FROM articles a INNER JOIN utilisateurs u ON a.id_utilisateur=u.id
+                    INNER JOIN categories c ON a.id_categorie = c.id  ORDER BY a.date DESC"
+        );
+        $article->execute();
+
+        //Do we have any result?
+        if ($article->rowCount() > 0) {
+            //Define how we want to fetch the results
+            $article->setFetchMode(PDO::FETCH_ASSOC);
+            $iterator = new IteratorIterator($article);
+
+            //Display the results
+            echo "<table>";
+            foreach ($iterator as $row) {
+                echo "<tr>
+                             <td>" . $row['login'] . "</td>
+                             <td>" . $row['article'] . "</td>
+                             <td>" . $row['id_utilisateur'] . "</td>
+                            <td>" . $row['nom'] . "</td>
+                            <td>" . $row['date'] . "</td>
+                            <td>" . $row['id'] . "</td>
+                            <td>
+                                <form method='POST'>
+                                    <input type='submit' name='delete_article' value='suprimer'>
+                                </form>
+                            </td>
+               </tr>";
+            }
+            echo "</table>";
+        } else {
+            echo '<p> No result could be displayed</p>';
+        }
+
+    }
 }
 
-}
 ?>

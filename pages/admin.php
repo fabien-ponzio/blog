@@ -42,6 +42,7 @@ require_once('../class/class-droits.php');
         $NewUser->registerNewUser($_POST['createLogin'], $_POST['eMail'], $_POST['createPW'], $_POST['confirmPW'], $_POST['droitNewUser']); 
     }
     ?>
+    <h1>Modification de User</h1>
     <form action="" method="POST">
         <label>Update User</label>
 
@@ -77,6 +78,7 @@ require_once('../class/class-droits.php');
         <input type="submit" name="mod" value="go!">
     </form>
 
+    <h1>Creation d'Utilisateur</h1>
     <form action="" method=POST>
 
     <label for="createLogin">Nouveau Login:</label>
@@ -99,5 +101,12 @@ require_once('../class/class-droits.php');
     <input type="submit" name="createUser">
 
     </form>
+
+    <h1>Modification Article</h1>
+
+    <?php
+        $articles = new Admin();
+        $articles->Delete_articles();
+    ?>
 </body>
 </html>
