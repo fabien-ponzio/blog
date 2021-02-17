@@ -30,6 +30,7 @@ class User
                $this->id = $user['id']; 
                $this->login = $user['login'];
                $this->password = $user['password'];
+               $_SESSION['id_droits'] = $user['id_droits'];
                var_dump($user);
                 $_SESSION['utilisateur']=$user;
                 $_SESSION['id'] = $user['id'];

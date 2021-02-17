@@ -1,24 +1,30 @@
 <?php
 session_start();
+
 // $database = ("../functions/db.php");
 require_once('../class/user.php');
 require_once('../class/classAdmin.php');
 require_once('../class/class-droits.php');
 
-// CHEMINS
-$path_index = "../index.php";
-$path_inscription = "inscription.php";
-$path_connexion = "";
-$path_profil = "profil.php";
-$path_articles = "articles.php";
-$path_create = "creer-article.php";
-$path_admin = "admin.php";
-$path_bouclier = "bouclier.php";
-$path_bouclierepee = "bouclier-eppe.php";
-$path_boucliermasse = "bouclier-masse.php";
-$path_double = "double.php";
-// HEADER
-require_once('header.php');
+ // CHEMINS
+ $path_index="../index.php";
+ $path_inscription="inscription.php";
+ $path_connexion="";
+ $path_profil="profil.php";
+ $path_articles="articles.php";
+ $path_create="creer-article.php";
+ $path_admin="admin.php";
+ $path_bouclier="bouclier.php";
+ $path_bouclierepee="bouclier-eppe.php";
+ $path_boucliermasse="bouclier-masse.php";
+ $path_double="double.php";
+ // HEADER
+ require_once('header.php');
+ if ($_SESSION['id_droits'] != 1337) {
+    echo"Cette page est accessible qu'aux administrateurs"; 
+ }
+ else {
+
 
 ?>
 <!DOCTYPE html>
@@ -33,7 +39,8 @@ require_once('header.php');
 
 <body>
     <?php
-    if (isset($_POST['mod'])) {
+
+    if(isset($_POST['mod'])){
         $droits = new User();
         $droits->updateDroit($_POST['moddingUser'], $_POST['droitUser']);
         $update = new Admin();
@@ -47,6 +54,10 @@ require_once('header.php');
     if (isset($_POST['deleteArticle'])){
         $deleteArticles = new Admin;
         $deleteArticles->deleteArticle($_POST['titreArticles']);
+    }
+    if (isset($_POST['deleteUser'])) {
+        $delete = new Admin();
+        $delete->deleteUser($_POST['moddingUser']); 
     }
     ?>
     <h1>Modification de User</h1>
@@ -83,6 +94,7 @@ require_once('header.php');
             ?>
         </select>
         <input type="submit" name="mod" value="go!">
+        <input type="submit" name="deleteUser" value="supprimew">
     </form>
 
     <h1>Creation d'Utilisateur</h1>
@@ -122,5 +134,5 @@ require_once('header.php');
         <input type="submit" value="Delete" name="deleteArticle">
     </form>
 </body>
-
 </html>
+<?php } ?>  

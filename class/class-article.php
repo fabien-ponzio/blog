@@ -124,6 +124,6 @@
                 echo '<p> No result could be displayed</p>';
             }
         }
-    }
 
+}
 ?>
