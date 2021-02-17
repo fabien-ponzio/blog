@@ -158,6 +158,14 @@ class Admin{
         $delete->bindValue(":titre", $titre, PDO::PARAM_STR);
         $delete->execute();
     }
+
+    public function deleteUser($login)
+    {
+
+        $deleteQuery = $this->db->prepare("DELETE FROM utilisateurs WHERE id = :login");
+        $deleteQuery->bindValue(":login", $login, PDO::PARAM_INT);
+        $deleteQuery->execute();
+    } 
 }
 
 ?>
