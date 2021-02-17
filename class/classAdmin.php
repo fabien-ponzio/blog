@@ -127,43 +127,36 @@ class Admin{
         }
     }
 
-    public function Delete_articles(){
+    public function getArticles()
+    {
 
-        $article = $this->db->prepare(
-            "SELECT u.login, a.article, a.id, a.id_utilisateur, a.id_categorie, a.date, c.nom
-                    FROM articles a INNER JOIN utilisateurs u ON a.id_utilisateur=u.id
-                    INNER JOIN categories c ON a.id_categorie = c.id  ORDER BY a.date DESC"
-        );
-        $article->execute();
-
-        //Do we have any result?
-        if ($article->rowCount() > 0) {
-            //Define how we want to fetch the results
-            $article->setFetchMode(PDO::FETCH_ASSOC);
-            $iterator = new IteratorIterator($article);
-
-            //Display the results
-            echo "<table>";
-            foreach ($iterator as $row) {
-                echo "<tr>
-                             <td>" . $row['login'] . "</td>
-                             <td>" . $row['article'] . "</td>
-                             <td>" . $row['id_utilisateur'] . "</td>
-                            <td>" . $row['nom'] . "</td>
-                            <td>" . $row['date'] . "</td>
-                            <td>" . $row['id'] . "</td>
-                            <td>
-                                <form method='POST'>
-                                    <input type='submit' name='delete_article' value='suprimer'>
-                                </form>
-                            </td>
-               </tr>";
-            }
-            echo "</table>";
-        } else {
-            echo '<p> No result could be displayed</p>';
+        $i = 0;
+        $drop = $this->db->prepare("SELECT * FROM articles");
+        $drop->execute();
+        //stockage des noms dans un tableau et dans le select du formulaire
+        // TANT QUE
+        while ($fetch = $drop->fetch(PDO::FETCH_ASSOC)) {
+            // le crochets [] vides correspondent à un tableau vide dans lesquels on va insérer $fetch['id'] & $fetch['nom']
+            $tableau[$i][] = $fetch['id'];
+            $tableau[$i][] = $fetch['Titre'];
+            $i++;
         }
+        return $tableau;
+    }
 
+    public function getDisplay()
+    {
+        $display = new Admin();
+        $tableau = $display->getArticles();
+        foreach ($tableau as $value) {
+            echo '<option value="' . $value[0] . '">' . $value[1] . '</option>';
+        }
+    }
+
+    public function deleteArticle($titre){
+        $delete = $this->db->prepare("DELETE FROM Articles WHERE id = :titre");
+        $delete->bindValue(":titre", $titre, PDO::PARAM_STR);
+        $delete->execute();
     }
 }
 

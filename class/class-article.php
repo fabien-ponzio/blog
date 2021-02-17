@@ -21,13 +21,14 @@
 
 // ----------------------------- Créé article --------------------------------------
 
-        public function create($article, $id_categorie){
+        public function create($Titre, $article, $id_categorie){
             $temps = time();
             $today = date("Y-m-d H:i:s");
             $id_utilisateur = $_SESSION['utilisateur']['id'];
-            $sql = "INSERT INTO articles (article, id_utilisateur, id_categorie, date) VALUES (:article, :id_utilisateur, :id_categorie, :date)";
+            $sql = "INSERT INTO articles (Titre, article, id_utilisateur, id_categorie, date) VALUES (:Titre, :article, :id_utilisateur, :id_categorie, :date)";
             $result = $this->db->prepare($sql);
 
+            $result->bindValue(":article", $Titre, PDO::PARAM_STR);
             $result->bindValue(":article", $article, PDO::PARAM_STR);
             $result->bindValue(":id_utilisateur", $id_utilisateur, PDO::PARAM_INT);
             $result->bindValue(":id_categorie", $id_categorie, PDO::PARAM_INT);
@@ -35,7 +36,6 @@
 
             $result->execute();
             return $result;
-
         }
 // ----------------------------- Créé article menu deroulant --------------------------------------
     public function dropDown(){
@@ -52,6 +52,14 @@
             $i++;
         }
         return $tableau;
+    }
+    public function dropDownDisplay()
+    {
+        $modelDroit = new Article;
+        $tableau = $modelDroit->dropDown();
+        foreach ($tableau as $value) {
+            echo '<option value="' . $value[0] . '">' . $value[1] . '</option>';
+        }
     }
 
         public function articlepage(){
@@ -90,8 +98,8 @@
                     "SELECT u.login, a.article, a.id_utilisateur, a.id_categorie, a.date, c.nom
                     FROM articles a INNER JOIN utilisateurs u ON a.id_utilisateur=u.id
                     INNER JOIN categories c ON a.id_categorie = c.id  ORDER BY a.date DESC LIMIT :limit OFFSET :offset");
-            $article->bindParam(':limit', $limit, PDO::PARAM_INT);
-            $article->bindParam(':offset', $offset, PDO::PARAM_INT);
+            $article->bindValue(':limit', $limit, PDO::PARAM_INT);
+            $article->bindValue(':offset', $offset, PDO::PARAM_INT);
             $article->execute();
 
             //Do we have any result?
