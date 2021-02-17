@@ -1,5 +1,6 @@
 <?php 
 session_start();
+
 // $database = ("../functions/db.php");
 require_once('../class/user.php');
 require_once('../class/classAdmin.php');
@@ -19,6 +20,11 @@ require_once('../class/class-droits.php');
  $path_double="double.php";
  // HEADER
  require_once('header.php');
+ if ($_SESSION['id_droits'] != 1337) {
+    echo"Cette page est accessible qu'aux administrateurs"; 
+ }
+ else {
+
 
 ?>
 <!DOCTYPE html>
@@ -31,6 +37,7 @@ require_once('../class/class-droits.php');
 </head>
 <body>
     <?php
+
     if(isset($_POST['mod'])){
         $droits = new User();
         $droits->updateDroit($_POST['moddingUser'], $_POST['droitUser']);
@@ -106,3 +113,4 @@ require_once('../class/class-droits.php');
     </form>
 </body>
 </html>
+<?php } ?>  
