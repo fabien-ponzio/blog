@@ -10,7 +10,7 @@ class Admin{
     {
         $this->db = connect();
     }
-
+//---------------------------------- UPDATE DROITS DEPUIS ADMIN.PHP -------------------------------------//
     public function updateRights($login, $id_droits){
         $query = $this->db->prepare ("UPDATE utilisateurs SET id_droits=:id WHERE id=:login");
         $query->bindValue(":id", $id_droits, PDO::PARAM_INT);
@@ -23,6 +23,7 @@ class Admin{
 
 
 
+// ------------------------------------ REGISTER NEW USER DEPUIS ADMIN.PHP ------------------------------------------//
 
     public function registerNewUser ($login, $email, $password, $confirmPW, $id_droits){
 
@@ -83,7 +84,7 @@ class Admin{
     }
     echo $error_log;
 }
-
+//-------------------------------------- UPDATE USER DEPUIS ADMIN.PHP -----------------------------------------------//
     public function UpdateNewUser($old_login, $login, $email, $password, $confirmPW){
 
         $login =  htmlspecialchars(trim($login));
