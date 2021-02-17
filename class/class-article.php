@@ -109,7 +109,7 @@
             $end = min(($offset + $limit), $total); // Pour afficher des varirables pas nécessaire
 
         //The back link
-            $prevlink = ($page > 1) ? '<a href="?page=' . ($page - 1) . '" title="Next page">&laquo;</a> <a href="?page=' . ($pages - 1) . '" title="Last page">&lsaquo;</a>' : '<span class="disabled">&laquo;</span> <span class="disabled">&lsaquo;</span>';
+            $prevlink = ($page) ? '<a href="?page=' . ($page - 1) . '" title="Next page">&laquo;</a> <a href="?page=' . ($page - 1) . '" title="Last page">&lsaquo;</a>' : '<span class="disabled">&laquo;</span> <span class="disabled">&lsaquo;</span>';
             // The "forward" link
             $nextlink = ($page < $pages) ? '<a href="?page=' . ($page + 1) . '" title="Next page">&rsaquo;</a> <a href="?page=' . $pages . '" title="Last page">&raquo;</a>' : '<span class="disabled">&rsaquo;</span> <span class="disabled">&raquo;</span>';
 
@@ -132,9 +132,17 @@
                 $iterator = new IteratorIterator($article);
 
                 //Display the results
+                echo "<table>";
                 foreach($iterator as $row){
-                    echo '<p>', $row['nom'], '</p>';
+                echo "<tr>
+                             <td>" . $row['login'] . "</td>
+                             <td>" . $row['article'] . "</td>
+                             <td>" . $row['id_utilisateur'] . "</td>
+                            <td>" . $row['nom'] . "</td>
+                            <td>" . $row['date'] . "</td>
+               </tr>";
                 }
+                echo "</table>";
             }else{
                 echo '<p> No result could be displayed</p>';
             }
