@@ -5,6 +5,8 @@ session_start();
 require_once('../class/user.php');
 require_once('../class/classAdmin.php');
 require_once('../class/class-droits.php');
+require_once('../class/class-categories.php');
+require_once('../class/class-article.php');
 
  // CHEMINS
  $path_index="../index.php";
@@ -59,6 +61,20 @@ require_once('../class/class-droits.php');
         $delete = new Admin();
         $delete->deleteUser($_POST['moddingUser']); 
     }
+    if (isset($_POST['CreateCategorie'])) { 
+        $addCat = new Categorie;
+        $addCat->addCategories($_POST['createCat']);
+    }
+    if (isset($_POST['UpdateCategorie'])){
+        $updateCat = new Categorie;
+        $updateCat->updateCategorie($_POST["updateCateg"]);
+    }
+    if (isset($_POST['deleteCat'])){
+        $deleteCat = new Categorie;
+        $deleteCat->deleteCategorie($_POST["delCategorie"]);
+    }
+    
+
     ?>
     <h1>Modification de User</h1>
     <form action="" method="POST">
@@ -73,19 +89,19 @@ require_once('../class/class-droits.php');
             ?>
         </select>
 
-        <label for="UpdateLog">Changez le nv pseudo</label>
-        <input type="text" name="UpdateLog">
+            <label for="UpdateLog">Changez le nv pseudo</label>
+            <input type="text" name="UpdateLog">
 
-        <label for="UpdateMail">E-Mail:</label>
-        <input type="eMail" name="UpdateMail">
+            <label for="UpdateMail">E-Mail:</label>
+            <input type="eMail" name="UpdateMail">
 
-        <label for="updatePW">Nouveau mot de passe:</label>
-        <input type="password" name="updatePW">
+            <label for="updatePW">Nouveau mot de passe:</label>
+            <input type="password" name="updatePW">
 
-        <label for="updateCPW">Confirmez le mot de passe: </label>
-        <input type="password" name="updateCPW">
+            <label for="updateCPW">Confirmez le mot de passe: </label>
+            <input type="password" name="updateCPW">
 
-        <label>Select Droits</label>
+            <label>Select Droits</label>
         <select name="droitUser">
             <option>Select</option>
             <?php
@@ -132,6 +148,37 @@ require_once('../class/class-droits.php');
             ?>
         </select>
         <input type="submit" value="Delete" name="deleteArticle">
+    </form>
+
+    <form action="" method="POST">
+        <label for="createCat">Nouvelle Categorie</label>
+        <input type="text" name="createCat">
+        <input type="submit" name='CreateCategorie'>
+    </form>
+
+    <form action="" method="POST">
+        <label for="updateCat">Update categorie name</label>
+        <select name="updateCat">
+                <option>Select</option>
+                    <?php
+                      $deleteCat = new Article();
+                      $deleteCat->dropDownDisplay();
+                    ?>
+            </select>
+        <input type="text" name="updateCateg">
+        <input type="submit" name='UpdateCategorie'>
+    </form>
+
+    <form  action="" method="POST">
+        <label for='delCategories'>Suprimer categorie</label>
+            <select name="delCategorie">
+                <option>Select</option>
+                    <?php
+                      $deleteCat = new Article();
+                      $deleteCat->dropDownDisplay();
+                    ?>
+            </select>
+        <input type="submit" name="deleteCat">
     </form>
 </body>
 </html>
