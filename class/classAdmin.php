@@ -166,7 +166,16 @@ class Admin{
         $deleteQuery = $this->db->prepare("DELETE FROM utilisateurs WHERE id = :login");
         $deleteQuery->bindValue(":login", $login, PDO::PARAM_INT);
         $deleteQuery->execute();
-    } 
+    }
+
+    public function updateArticle($old_titre, $titre, $article, $categorie){
+        $update = $this->db->prepare("UPDATE articles SET Titre = :titre, article = :txtArticle, id_categorie = :categorie, date = NOW() WHERE id = :old_titre");
+        $update->bindValue(":old_titre", $old_titre, PDO::PARAM_INT);
+        $update->bindValue(":titre", $titre, PDO::PARAM_STR);
+        $update->bindValue(":txtArticle", $article, PDO::PARAM_STR);
+        $update->bindValue(":categorie", $categorie, PDO::PARAM_INT);
+        $update->execute();
+    }
 }
 
 ?>
