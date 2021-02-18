@@ -67,7 +67,7 @@ require_once('../class/class-article.php');
     }
     if (isset($_POST['UpdateCategorie'])){
         $updateCat = new Categorie;
-        $updateCat->updateCategorie($_POST["updateCateg"]);
+        $updateCat->updateCategorie($_POST['updateCat'],$_POST["updateCateg"]);
     }
     if (isset($_POST['deleteCat'])){
         $deleteCat = new Categorie;
