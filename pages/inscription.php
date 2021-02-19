@@ -31,7 +31,7 @@ require_once('../class/user.php');
 <?php 
 
 // public function register($login, $password, $confirmPW)
-var_dump($_SESSION); 
+//var_dump($_SESSION); 
 if (isset($_POST["register"])){
     $user = new User();
     $user->register($_POST['login'],$_POST['email'], $_POST['password'], $_POST['confirmPW']); 

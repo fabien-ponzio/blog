@@ -35,7 +35,7 @@ if (isset($_POST["connect"])){
 <main>
     <form action="" method="POST">
                 <?php
-                var_dump($_SESSION);
+                //var_dump($_SESSION);
                 ?>
         <label for="login">login</label>
         <input type="text" name="login">
