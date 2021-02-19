@@ -1,5 +1,4 @@
 <?php
-session_start();
 
 // $database = ("../functions/db.php");
 require_once('../class/user.php');
@@ -11,15 +10,16 @@ require_once('../class/class-article.php');
  // CHEMINS
  $path_index="../index.php";
  $path_inscription="inscription.php";
- $path_connexion="";
+ $path_connexion="connexion.php";
  $path_profil="profil.php";
  $path_articles="articles.php";
  $path_create="creer-article.php";
  $path_admin="admin.php";
  $path_bouclier="bouclier.php";
- $path_bouclierepee="bouclier-eppe.php";
- $path_boucliermasse="bouclier-masse.php";
+//  $path_bouclierepee="bouclier-eppe.php";
+//  $path_boucliermasse="bouclier-masse.php";
  $path_double="double.php";
+
  // HEADER
  require_once('header.php');
  if (!isset($_SESSION['id_droits']) OR $_SESSION['id_droits'] != 1337) {
@@ -194,7 +194,7 @@ require_once('../class/class-article.php');
     </form>
 
     <form  action="" method="POST">
-        <label for='delCategories'>Suprimer categorie</label>
+        <label for='delCategories'>Supprimer categorie</label>
             <select name="delCategorie">
                 <option>Select</option>
                     <?php
@@ -206,4 +206,6 @@ require_once('../class/class-article.php');
     </form>
 </body>
 </html>
-<?php } ?>  
+<?php $tableDroits = new Admin;
+        $tableDroits->userTable();
+} ?>  
