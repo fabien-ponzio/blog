@@ -26,11 +26,10 @@
             $sql = "INSERT INTO articles (Titre, article, id_utilisateur, id_categorie, date) VALUES (:Titre, :article, :id_utilisateur, :id_categorie, NOW())";
             $result = $this->db->prepare($sql);
 
-            $result->bindValue(":article", $Titre, PDO::PARAM_STR);
+            $result->bindValue(":Titre", $Titre, PDO::PARAM_STR);
             $result->bindValue(":article", $article, PDO::PARAM_STR);
             $result->bindValue(":id_utilisateur", $id_utilisateur, PDO::PARAM_INT);
             $result->bindValue(":id_categorie", $id_categorie, PDO::PARAM_INT);
-            $result->bindValue(":date", $today, PDO::PARAM_STR);
 
             $result->execute();
             return $result;

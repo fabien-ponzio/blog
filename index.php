@@ -1,9 +1,7 @@
 <?php 
 
-$database = "functions/db.php"; 
-require_once "class/user.php";
-//HEADER
-$title = "Accueil";
+require_once('functions/db.php'); 
+require_once("class/user.php");
 
  // CHEMINS
  $path_index="";
@@ -13,12 +11,18 @@ $title = "Accueil";
  $path_articles="pages/articles.php";
  $path_create="pages/creer-article.php";
  $path_admin="pages/admin.php";
- $path_bouclier="pages/bouclier.php";
- $path_bouclierepee="pages/bouclier-eppe.php";
- $path_boucliermasse="pages/bouclier-masse.php";
- $path_double="pages/double.php";
- // HEADER
- require_once('pages/header.php');
-var_dump($_SESSION); 
 
 ?>
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <?php include_once('pages/header.php');?>
+</body>
+</html>
