@@ -1,6 +1,6 @@
 <?php
 
-// $database = ("../functions/db.php");
+$database = ("../functions/db.php");
 require_once('../class/user.php');
 require_once('../class/classAdmin.php');
 require_once('../class/class-droits.php');

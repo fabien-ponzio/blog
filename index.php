@@ -1,7 +1,9 @@
 <?php 
-
-require_once('functions/db.php'); 
+//co db
+$database = ("functions/db.php");
+require_once("functions/db.php"); 
 require_once("class/user.php");
+require_once("class/class-article.php");
 
  // CHEMINS
  $path_index="";
@@ -23,6 +25,26 @@ require_once("class/user.php");
     <title>Document</title>
 </head>
 <body>
-    <?php include_once('pages/header.php');?>
+    <?php include_once('pages/header.php');
+    
+        $NewArticle = new Article;
+    // $NewArticle->displayArticle();
+    $NewArticle->articlepageIndex();
+    if (isset($_POST['trierCategorie'])){
+        $trie = new Article;
+        $trie->articleByCategoryIndex($_POST['updateCat']);
+        echo "<table>";
+        foreach($_SESSION['categorie'] as $row){
+            echo 
+            "<tr>
+                <td>" . $row['Titre'] . "</td>
+                <td>" . $row['article'] . "</td>
+                <td>" . $row['nom'] ."</td>
+                <td>" . $row['date'] ."</td>
+            </tr>";
+        }
+        echo "</table>";
+    }
+    ?>
 </body>
 </html>
