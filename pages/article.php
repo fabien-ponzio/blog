@@ -24,6 +24,11 @@ require_once('../class/classCommentaire.php');
  $path_double="double.php";
  // HEADER
  require_once('header.php');
+ if (isset($_GET['id'])){
+     $article = new Article;
+     $article->ArticleById($_GET['id']);
+     var_dump($_GET['id']);
+ }
 ?>
 <h1>Article 1</h1>
 <?php

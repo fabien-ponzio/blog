@@ -93,7 +93,7 @@
 
             //Prepare the page of query
             $article=$this->db->prepare(
-                    "SELECT u.login, a.article, a.id_utilisateur, a.id_categorie, a.date, c.nom, a.Titre
+                    "SELECT u.login, a.article, a.id_utilisateur, a.id_categorie, a.date, c.nom, a.Titre, a.id
                     FROM articles a INNER JOIN utilisateurs u ON a.id_utilisateur=u.id
                     INNER JOIN categories c ON a.id_categorie = c.id  ORDER BY a.date DESC LIMIT :limit OFFSET :offset");
             $article->bindValue(':limit', $limit, PDO::PARAM_INT);
@@ -111,7 +111,7 @@
                 foreach($iterator as $row){
                 echo 
                     "<tr>
-                        <td> <a href='article.php?=" . $row['Titre'] . "'>" . $row['Titre'] . "</a></td>
+                        <td> <a href='article.php?id=" . $row['id'] . "'>" . $row['Titre'] . "</a></td>
                         <td>" . $row['article'] . "</td>
                         <td>" . $row['nom'] . "</td>
                         <td>" . $row['date'] . "</td>
@@ -133,6 +133,15 @@
         $_SESSION['categorie'] = $result;
         // var_dump($result); //{DEBUG}
 
+    }
+
+    public function ArticleById($id){
+        $article = $this->db->prepare("SELECT a.article, a.id_categorie, a.date, a.Titre, a.id, c.nom, c.id
+        FROM articles a INNER JOIN categories c ON a.id_categorie = c.id WHERE a.id = :id");
+        $article->bindValue(':id', $id, PDO::PARAM_INT);
+        $article->execute();
+        $result = $article->fetch();
+        var_dump($result, $id);
     }
 
 }
