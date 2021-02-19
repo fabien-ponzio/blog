@@ -22,10 +22,8 @@
 // ----------------------------- Créé article --------------------------------------
 
         public function create($Titre, $article, $id_categorie){
-            $temps = time();
-            $today = date("Y-m-d H:i:s");
             $id_utilisateur = $_SESSION['utilisateur']['id'];
-            $sql = "INSERT INTO articles (Titre, article, id_utilisateur, id_categorie, date) VALUES (:Titre, :article, :id_utilisateur, :id_categorie, :date)";
+            $sql = "INSERT INTO articles (Titre, article, id_utilisateur, id_categorie, date) VALUES (:Titre, :article, :id_utilisateur, :id_categorie, NOW())";
             $result = $this->db->prepare($sql);
 
             $result->bindValue(":article", $Titre, PDO::PARAM_STR);
@@ -128,12 +126,12 @@
 
     public function articleByCategory($categorie){
         $categories = $this->db->prepare("SELECT a.article, a.id_categorie, a.date, c.nom, a.Titre, c.id 
-        FROM articles a INNER JOIN categories c WHERE c.id = :id_categorie ORDER BY a.date");
+        FROM articles a INNER JOIN categories c ON a.id_categorie = c.id WHERE c.id = :id_categorie ORDER BY a.date DESC");
         $categories->bindValue(':id_categorie', $categorie, PDO::PARAM_INT);
         $categories->execute();
         $result = $categories->fetchAll();
         $_SESSION['categorie'] = $result;
-        // var_dump($result); {DEBUG}
+        // var_dump($result); //{DEBUG}
 
     }
 
