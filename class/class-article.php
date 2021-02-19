@@ -95,7 +95,7 @@
 
             //Prepare the page of query
             $article=$this->db->prepare(
-                    "SELECT u.login, a.article, a.id_utilisateur, a.id_categorie, a.date, c.nom
+                    "SELECT u.login, a.article, a.id_utilisateur, a.id_categorie, a.date, c.nom, a.Titre
                     FROM articles a INNER JOIN utilisateurs u ON a.id_utilisateur=u.id
                     INNER JOIN categories c ON a.id_categorie = c.id  ORDER BY a.date DESC LIMIT :limit OFFSET :offset");
             $article->bindValue(':limit', $limit, PDO::PARAM_INT);
@@ -111,19 +111,31 @@
                 //Display the results
                 echo "<table>";
                 foreach($iterator as $row){
-                echo "<tr>
-                             <td>" . $row['login'] . "</td>
-                             <td>" . $row['article'] . "</td>
-                             <td>" . $row['id_utilisateur'] . "</td>
-                            <td>" . $row['nom'] . "</td>
-                            <td>" . $row['date'] . "</td>
-               </tr>";
+                echo 
+                    "<tr>
+                        <td> <a href='article.php?=" . $row['Titre'] . "'>" . $row['Titre'] . "</a></td>
+                        <td>" . $row['article'] . "</td>
+                        <td>" . $row['nom'] . "</td>
+                        <td>" . $row['date'] . "</td>
+                    </tr>";
                 }
                 echo "</table>";
             }else{
                 echo '<p> No result could be displayed</p>';
             }
         }
+
+
+    public function articleByCategory($categorie){
+        $categories = $this->db->prepare("SELECT a.article, a.id_categorie, a.date, c.nom, a.Titre, c.id 
+        FROM articles a INNER JOIN categories c WHERE c.id = :id_categorie ORDER BY a.date");
+        $categories->bindValue(':id_categorie', $categorie, PDO::PARAM_INT);
+        $categories->execute();
+        $result = $categories->fetchAll();
+        $_SESSION['categorie'] = $result;
+        // var_dump($result); {DEBUG}
+
+    }
 
 }
 ?>
