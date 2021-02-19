@@ -22,10 +22,8 @@
 // ----------------------------- Créé article --------------------------------------
 
         public function create($Titre, $article, $id_categorie){
-            $temps = time();
-            $today = date("Y-m-d H:i:s");
             $id_utilisateur = $_SESSION['utilisateur']['id'];
-            $sql = "INSERT INTO articles (Titre, article, id_utilisateur, id_categorie, date) VALUES (:Titre, :article, :id_utilisateur, :id_categorie, :date)";
+            $sql = "INSERT INTO articles (Titre, article, id_utilisateur, id_categorie, date) VALUES (:Titre, :article, :id_utilisateur, :id_categorie, NOW())";
             $result = $this->db->prepare($sql);
 
             $result->bindValue(":article", $Titre, PDO::PARAM_STR);
