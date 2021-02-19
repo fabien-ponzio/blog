@@ -38,6 +38,13 @@ class Commentaires
         echo $errorCom;
     }
 
+// ----------------------------- display commentaire -------------------------------------
 
-
+public function displayComment($id){
+    $commentaire = $this->db->prepare("SELECT c.commentaire, c.date, c.id_utilisateur, c.id_article, a.id  FROM commentaires c INNER JOIN articles a ON c.id_article = a.id WHERE a.id = :id"); 
+    $commentaire->bindValue(':id', $id, PDO::PARAM_INT);
+    $commentaire->execute();
+    $result = $commentaire->fetchAll(); 
+    var_dump($result); 
+}
 }

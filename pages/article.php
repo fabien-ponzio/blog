@@ -30,20 +30,31 @@ require_once('../class/classCommentaire.php');
      var_dump($_GET['id']);
  }
 ?>
-<h1>Article 1</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artcile</title>
+</head>
+<body>
+    
+
 <?php
-// var_dump($_SESSION);
-// echo"com1";
-// echo"com2"; 
+
 $login = $_SESSION['utilisateur'];
-var_dump($login);
 if(isset($_POST["postComment"])){
-    $commentaire = new Commentaires();
+    $commentaire = new Commentaires;
     $commentaire->postComment($login, $_POST['comment']);
 }
+$comment= new Commentaires; 
+$comment->displayComment($_GET['id']); 
+
 ?>
 <form action="" method=POST>
 <label for="">Ajouter un commentaire</label>
 <textarea name="comment" id="" cols="30" rows="10"></textarea>
 <input type="submit" name="postComment" value="commenter">
 </form>
+</body>
+</html>
