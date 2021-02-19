@@ -24,17 +24,23 @@ require_once('../class/classCommentaire.php');
  $path_double="double.php";
  // HEADER
  require_once('header.php');
+ if (isset($_GET['id'])){
+     $article = new Article;
+     $article->Articlecom($_GET['id']);
+     var_dump($_GET['id']);
+ }
 ?>
 <h1>Article 1</h1>
 <?php
+var_dump($_GET['id']);
 var_dump($_SESSION);
 echo"com1";
 echo"com2"; 
-$login = $_SESSION['utilisateur'];
-if(isset($_POST["postComment"])){
-    $commentaire = new Commentaires();
-    $commentaire->postComment($login, $_POST['comment']);
-}
+// $login = $_SESSION['utilisateur'];
+// if(isset($_POST["postComment"])){
+//     $commentaire = new Commentaires();
+//     $commentaire->postComment($login, $_POST['comment']);
+// }
 ?>
 <form action="" method=POST>
 <label for="">Ajouter un commentaire</label>

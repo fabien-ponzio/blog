@@ -1,10 +1,10 @@
 <?php
-$database = ("../functions/db.php"); 
+
+
+session_start();
+$database = ("../functions/db.php");
+require_once('../functions/db.php');
 require_once('../class/user.php');
-$user=new user();
-
-session_start(); 
-
  // CHEMINS
  $path_index="../index.php";
  $path_inscription="inscription.php";

@@ -25,7 +25,7 @@ class Commentaires
 
             if (($comLength < 240)){
                 $insertCom = $this->db->prepare("INSERT INTO commentaires (login, commentaire) VALUES (:login, :commentaire)");
-                $insertCom = bindValues
+                $insertCom = bindValues;
             }
             else{
                 $errorCom = "La taille de commentaire maximum est de 240 caractères";
