@@ -11,6 +11,7 @@ require_once('../class/user.php');
  $path_articles="articles.php";
  $path_create="creer-article.php";
  $path_admin="admin.php";
+  $path_deconnexion="deconnexion.php";
  // HEADER
  
 

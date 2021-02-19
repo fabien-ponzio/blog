@@ -13,12 +13,6 @@
             $this->db = connect();
         }
 
-// ----------------------------- Anti injection sql --------------------------------------
-        // function cleanQuery($article){
-        //     if(get_magic_quotes_gpc())   // pas de duplicate backslashes
-        //         $article = stripslashes($article);
-        //     return mysql_escape_string($article);
-        // }
 
 // ----------------------------- Créé article --------------------------------------
 
@@ -51,6 +45,10 @@
         }
         return $tableau;
     }
+
+
+
+    
     public function dropDownDisplay()
     {
         $modelDroit = new Article;
@@ -59,6 +57,11 @@
             echo '<option value="' . $value[0] . '">' . $value[1] . '</option>';
         }
     }
+
+
+
+
+
 
         public function articlepage(){
             $total = $this->db->query("SELECT COUNT(*) FROM articles")->fetchColumn();
@@ -124,6 +127,8 @@
         }
 
 
+
+
     public function articleByCategory($categorie){
         $categories = $this->db->prepare("SELECT a.article, a.id_categorie, a.date, c.nom, a.Titre, c.id 
         FROM articles a INNER JOIN categories c ON a.id_categorie = c.id WHERE c.id = :id_categorie ORDER BY a.date DESC");
@@ -134,6 +139,9 @@
         // var_dump($result); //{DEBUG}
 
     }
+
+
+
 
     public function ArticleById($id){
         $article = $this->db->prepare("SELECT a.article, a.id_categorie, a.date, a.Titre, a.id, c.nom, c.id
