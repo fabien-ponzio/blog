@@ -5,8 +5,8 @@ require_once('../class/user.php');
 
  // CHEMINS
  $path_index="../index.php";
- $path_inscription="inscription.php";
- $path_connexion="";
+ $path_inscription="";
+ $path_connexion="connexion.php";
  $path_profil="profil.php";
  $path_articles="articles.php";
  $path_create="creer-article.php";
@@ -31,7 +31,7 @@ require_once('../class/user.php');
 <?php 
 
 // public function register($login, $password, $confirmPW)
-
+var_dump($_SESSION); 
 if (isset($_POST["register"])){
     $user = new User();
     $user->register($_POST['login'],$_POST['email'], $_POST['password'], $_POST['confirmPW']); 

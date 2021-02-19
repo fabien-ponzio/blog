@@ -1,5 +1,4 @@
 <?php 
-require_once('../functions/db.php');
 
 class User
 {
