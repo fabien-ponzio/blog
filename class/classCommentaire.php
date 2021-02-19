@@ -38,6 +38,8 @@ class Commentaires
         echo $errorCom;
     }
 
-
-
+// ----------------------------- display commentaire -------------------------------------
+public function displayComment(){
+    
+}
 }
