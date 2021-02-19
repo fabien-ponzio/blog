@@ -27,10 +27,11 @@ require_once('../class/classCommentaire.php');
 ?>
 <h1>Article 1</h1>
 <?php
-var_dump($_SESSION);
-echo"com1";
-echo"com2"; 
+// var_dump($_SESSION);
+// echo"com1";
+// echo"com2"; 
 $login = $_SESSION['utilisateur'];
+var_dump($login);
 if(isset($_POST["postComment"])){
     $commentaire = new Commentaires();
     $commentaire->postComment($login, $_POST['comment']);
