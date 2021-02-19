@@ -1,8 +1,5 @@
 <?php
 
-
-session_start();
-$database = ("../functions/db.php");
 require_once('../functions/db.php');
 require_once('../class/user.php');
  // CHEMINS
@@ -13,12 +10,8 @@ require_once('../class/user.php');
  $path_articles="articles.php";
  $path_create="creer-article.php";
  $path_admin="admin.php";
- $path_bouclier="bouclier.php";
- $path_bouclierepee="bouclier-eppe.php";
- $path_boucliermasse="bouclier-masse.php";
- $path_double="double.php";
  // HEADER
- require_once('header.php');
+ 
 
 
 ?>
@@ -32,6 +25,7 @@ require_once('../class/user.php');
     <title>profil</title>
 </head>
 <body>
+<?php require_once('header.php');?>
 <main>
 <form action="profil.php" method="POST">
 
@@ -50,6 +44,7 @@ require_once('../class/user.php');
 // var_dump($_POST);
 
 if (isset($_POST['submit'])){
+    $user = new User;
     $user->profile($_POST['newlogin'],$_POST['newMail'],$_POST['newpassword'],$_POST['confpassword']);
 
 }

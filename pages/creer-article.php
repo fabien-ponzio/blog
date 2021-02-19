@@ -1,5 +1,4 @@
 <?php 
-session_start();
 include('../functions/db.php');
 require_once('../class/class-article.php');
 require_once('../class/user.php');

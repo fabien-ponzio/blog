@@ -1,6 +1,6 @@
 <?php 
 
-$database = ("../functions/db.php"); 
+require_once('../functions/db.php');
 require_once('../class/user.php');
 
  // CHEMINS
@@ -11,13 +11,12 @@ require_once('../class/user.php');
  $path_articles="articles.php";
  $path_create="creer-article.php";
  $path_admin="admin.php";
- $path_bouclier="bouclier.php";
- $path_bouclierepee="bouclier-eppe.php";
- $path_boucliermasse="bouclier-masse.php";
- $path_double="double.php";
- // HEADER
- require_once('header.php');
 
+if (isset($_POST["register"])){
+    $user = new User();
+    $user->register($_POST['login'],$_POST['email'], $_POST['password'], $_POST['confirmPW']); 
+    $_SESSION['user']=$user; 
+}
 ?>
 
 <!DOCTYPE html>
@@ -28,29 +27,23 @@ require_once('../class/user.php');
     <title>Document</title>
 </head>
 <body>
-<?php 
 
-// public function register($login, $password, $confirmPW)
-var_dump($_SESSION); 
-if (isset($_POST["register"])){
-    $user = new User();
-    $user->register($_POST['login'],$_POST['email'], $_POST['password'], $_POST['confirmPW']); 
-    $_SESSION['user']=$user; 
-}
-?>
+<?php include_once('header.php'); ?>
 
-<form action="" method="POST">
+    <main>
+        <form action="" method="POST">
 
-    <label for="login">login</label>
-    <input type="text" name="login">
-    <label for="email">email</label>
-    <input type="email" name="email">
-    <label for="password" name="password">mdp</label>
-    <input type="password" name="password">
-    <label for="confirmPW">Confirm</label>
-    <input type="password" name="confirmPW">
-    <input type="submit" name="register" value="go!">
+            <label for="login">login</label>
+            <input type="text" name="login">
+            <label for="email">email</label>
+            <input type="email" name="email">
+            <label for="password" name="password">mdp</label>
+            <input type="password" name="password">
+            <label for="confirmPW">Confirm</label>
+            <input type="password" name="confirmPW">
+            <input type="submit" name="register" value="go!">
 
-</form>
+        </form>
+    </main>
 </body>
 </html>
