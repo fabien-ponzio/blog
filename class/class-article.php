@@ -135,7 +135,7 @@
 
     }
 
-    public function Articlecom($id){
+    public function ArticleById($id){
         $article = $this->db->prepare("SELECT a.article, a.id_categorie, a.date, a.Titre, a.id, c.nom, c.id
         FROM articles a INNER JOIN categories c ON a.id_categorie = c.id WHERE a.id = :id");
         $article->bindValue(':id', $id, PDO::PARAM_INT);

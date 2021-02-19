@@ -26,7 +26,7 @@ require_once('../class/classCommentaire.php');
  require_once('header.php');
  if (isset($_GET['id'])){
      $article = new Article;
-     $article->Articlecom($_GET['id']);
+     $article->ArticleById($_GET['id']);
      var_dump($_GET['id']);
  }
 ?>
