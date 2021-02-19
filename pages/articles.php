@@ -2,7 +2,8 @@
 
 $database = ("../functions/db.php"); 
 require_once("../class/user.php");
-require_once("../class/class-article.php"); 
+require_once("../class/class-article.php");
+require_once("../class/class-categories.php");
 
  // CHEMINS
  $path_index="../index.php";
@@ -21,4 +22,45 @@ require_once("../class/class-article.php");
 $NewArticle = new Article;
 // $NewArticle->displayArticle();
 $NewArticle->articlepage();
+if (isset($_POST['trierCategorie'])){
+    $trie = new Article;
+    $trie->articleByCategory($_POST['updateCat']);
+    echo "<table>";
+    foreach($_SESSION['categorie'] as $row){
+        echo 
+        "<tr>
+            <td>" . $row['Titre'] . "</td>
+            <td>" . $row['article'] . "</td>
+            <td>" . $row['nom'] ."</td>
+            <td>" . $row['date'] ."</td>
+        </tr>";
+    }
+    echo "</table>";
+}
 ?>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste Articles</title>
+</head>
+<body>
+    <main>
+
+        <form action="" method="POST">
+
+            <label for="">Choisie une categorie</label>
+            <select name="updateCat">
+                <option>Select</option>
+                    <?php
+                      $deleteCat = new Article();
+                      $deleteCat->dropDownDisplay();
+                    ?>
+            </select>
+
+            <input type="submit" value="Trier" name="trierCategorie">
+
+        </form>
+    </main>
+</body>
+</html>

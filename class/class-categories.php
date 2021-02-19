@@ -31,4 +31,12 @@
 
             $updateCat->execute();
         }
+
+        public function affichageCategorie(){
+            // $categorie = $this->db->prepare("SELECT * FROM categories");
+            // $categorie->execute();
+            // $categories = $categorie->fetchAll();
+            // $_SESSION['categories'] = $categories;
+            // return $_SESSION['categories'];
+        }
     }
