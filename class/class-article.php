@@ -1,5 +1,6 @@
 <?php
-    require_once('../functions/db.php');
+    require_once($database);
+    
 
     class Article{
         private $id;
@@ -142,6 +143,67 @@
         $result = $article->fetch();
         var_dump($result, $id);
     }
+//-------------------------------------------afficher les 3 dernier articles index----------------------------------
+public function articlepageIndex(){
+    $total = $this->db->query("SELECT COUNT(*) FROM articles LIMIT 3")->fetchColumn();
 
+    //How Many items to list per pages
+    $limit = 3;
+
+    //How many page will there be
+    $pages = ceil($total / $limit); //ceil function qui arondi au nombre supérieurs
+
+    //What page are we currently on ?
+    $page = min($pages, filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT, array(
+        'option' => array(
+            'default' => 1,
+            'min_range' => 1,
+        ),
+    )));
+
+    //Calcultae the offset for the query
+    $offset = ($page) * $limit;
+
+    //Prepare the page of query
+    $article=$this->db->prepare(
+            "SELECT u.login, a.article, a.id_utilisateur, a.id_categorie, a.date, c.nom, a.Titre, a.id
+            FROM articles a INNER JOIN utilisateurs u ON a.id_utilisateur=u.id
+            INNER JOIN categories c ON a.id_categorie = c.id  ORDER BY a.date DESC LIMIT :limit OFFSET :offset");
+    $article->bindValue(':limit', $limit, PDO::PARAM_INT);
+    $article->bindValue(':offset', $offset, PDO::PARAM_INT);
+    $article->execute();
+
+    //Do we have any result?
+    if ($article->rowCount() > 0){
+        //Define how we want to fetch the results
+        $article->setFetchMode(PDO::FETCH_ASSOC);
+        $iterator = new IteratorIterator($article);
+
+        //Display the results
+        echo "<table>";
+        foreach($iterator as $row){
+        echo 
+            "<tr>
+                <td> <a href='article.php?id=" . $row['id'] . "'>" . $row['Titre'] . "</a></td>
+                <td>" . $row['article'] . "</td>
+                <td>" . $row['nom'] . "</td>
+                <td>" . $row['date'] . "</td>
+            </tr>";
+        }
+        echo "</table>";
+    }else{
+        echo '<p> No result could be displayed</p>';
+    }
+}
+public function articleByCategoryIndex($categorie){
+    $categories = $this->db->prepare("SELECT a.article, a.id_categorie, a.date, c.nom, a.Titre, c.id 
+    FROM articles a INNER JOIN categories c ON a.id_categorie = c.id WHERE c.id = :id_categorie ORDER BY a.date DESC LIMIT 3");
+    $categories->bindValue(':id_categorie', $categorie, PDO::PARAM_INT);
+    $categories->execute();
+    $result = $categories->fetchAll();
+    $_SESSION['categorie'] = $result;
+    // var_dump($result); //{DEBUG}
+
+}
 }
 ?>
