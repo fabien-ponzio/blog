@@ -67,11 +67,15 @@ require_once('../class/class-article.php');
     }
     if (isset($_POST['UpdateCategorie'])){
         $updateCat = new Categorie;
-        $updateCat->updateCategorie($_POST["updateCateg"]);
+        $updateCat->updateCategorie($_POST['updateCat'],$_POST["updateCateg"]);
     }
     if (isset($_POST['deleteCat'])){
         $deleteCat = new Categorie;
         $deleteCat->deleteCategorie($_POST["delCategorie"]);
+    }
+    if (isset($_POST['updateArticle'])){
+        $updateArticle = new Admin;
+        $updateArticle->updateArticle($_POST['titreArticles'],$_POST['titre'], $_POST['txtarticle'], $_POST['updateCat']);
     }
     
 
@@ -147,8 +151,28 @@ require_once('../class/class-article.php');
                 $articles->getDisplay();
             ?>
         </select>
+
+        <label for="">New Titres</label>
+        <input type="text" name="titre">
+
+        <label for="">New Texte</label>
+        <textarea name="txtarticle" cols="80" rows="10"></textarea>
+
+        <label for="">Select categorie</label>
+        <select name="updateCat">
+                <option>Select</option>
+                    <?php
+                      $deleteCat = new Article();
+                      $deleteCat->dropDownDisplay();
+                    ?>
+            </select>
+        <input type="submit" name="updateArticle" value="Update"></input>
         <input type="submit" value="Delete" name="deleteArticle">
     </form>
+
+
+
+    <h1>CATEGORIE</h1>
 
     <form action="" method="POST">
         <label for="createCat">Nouvelle Categorie</label>

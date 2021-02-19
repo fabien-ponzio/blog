@@ -24,10 +24,19 @@
             $deleteCat->execute();
         }
 // ----------------------------- Update categories------------------------------------- 
-        public function updateCategorie($nom){
-            $updateCat = $this->db->prepare("UPDATE categories SET nom = :nom WHERE id = :nom");
+        public function updateCategorie($old_nom, $nom){
+            $updateCat = $this->db->prepare("UPDATE categories SET nom = :nom WHERE id = :old_nom");
+            $updateCat->bindValue(":old_nom",$old_nom, PDO::PARAM_INT);
             $updateCat->bindValue(":nom", $nom, PDO::PARAM_STR);
 
             $updateCat->execute();
+        }
+
+        public function affichageCategorie(){
+            // $categorie = $this->db->prepare("SELECT * FROM categories");
+            // $categorie->execute();
+            // $categories = $categorie->fetchAll();
+            // $_SESSION['categories'] = $categories;
+            // return $_SESSION['categories'];
         }
     }
