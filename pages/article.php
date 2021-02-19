@@ -38,9 +38,12 @@ require_once('../class/classCommentaire.php');
 $login = $_SESSION['utilisateur'];
 var_dump($login);
 if(isset($_POST["postComment"])){
-    $commentaire = new Commentaires();
+    $commentaire = new Commentaires;
     $commentaire->postComment($login, $_POST['comment']);
 }
+$comment= new Commentaires; 
+$comment->displayComment($_GET['id']); 
+
 ?>
 <form action="" method=POST>
 <label for="">Ajouter un commentaire</label>
