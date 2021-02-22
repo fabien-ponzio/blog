@@ -44,9 +44,9 @@ if (isset($_POST["connect"])){
 <body>
  <main id="mainConnect">
     <form id="form_connect" action="" method="POST">
-        <label for="login">login</label>
+        <label for="login">Login</label>
         <input type="text" name="login">
-        <label for="password" name="password">mdp</label>
+        <label for="password" name="password">Mot de passe</label>
         <input type="password" name="password">
         <input type="submit" name="connect" value="go!">
 
