@@ -65,11 +65,11 @@ $comment->displayComment($_GET['id']);
             echo "<table class='flex column j_center a_center' id=''>";
                 foreach($_SESSION['commentaire'] as $row){
                     echo 
-                    "<td>
+                    "<tr>
                         <td>" . $row['login'] . "</td>
                         <td>" . $row['commentaire'] . "</td>
                         <td>" . $row['date'] ."</td>
-                    </td>";
+                    </tr>";
                 }
                 echo "</table>";
         }
