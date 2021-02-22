@@ -30,8 +30,8 @@ require_once("class/class-article.php");
     <title>Document</title>
 </head>
 <body>
-    <?php require_once('pages/footer.php');?>
-   
+    
+   <?php include_once('pages/header.php'); ?>
 
     <main class="flex column a_center j_around">
         <h1 class="flex">Le Bouclier</h1>
@@ -61,6 +61,6 @@ require_once("class/class-article.php");
             }
         ?>
     </main>
-     <?php include_once('pages/header.php'); ?>
+    <?php require_once('pages/footer.php');?>
 </body>
 </html>
