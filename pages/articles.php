@@ -39,6 +39,7 @@ if (isset($_POST['trierCategorie'])){
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="../css/header.css">
     <title>Liste Articles</title>
 </head>
 <body>
