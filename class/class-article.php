@@ -92,7 +92,7 @@
             $nextlink = ($page < $pages) ? '<a href="?page=' . ($page + 1) . '" title="Next page">&rsaquo;</a> <a href="?page=' . $pages . '" title="Last page">&raquo;</a>' : '<span class="disabled">&rsaquo;</span> <span class="disabled">&raquo;</span>';
 
         // Display the paging information
-            echo '<div id="paging"><p>', $prevlink, ' Page ', $page, ' of ', $pages, ' pages, displaying ', $start, '-', $end, ' of ', $total, ' results ', $nextlink, ' </p></div>';
+            echo '<div id="paging"><p>', $prevlink, ' Page ', $page,' sur ', $total, $nextlink, ' </p></div>';
 
             //Prepare the page of query
             $article=$this->db->prepare(
@@ -114,10 +114,10 @@
                 foreach($iterator as $row){
                 echo 
                     "<tr>
-                        <td> <a href='article.php?id=" . $row['id'] . "'>" . $row['Titre'] . "</a></td>
-                        <td>" . $row['article'] . "</td>
-                        <td>" . $row['nom'] . "</td>
-                        <td>" . $row['date'] . "</td>
+                        <td id='Titre_articles'> <a href='article.php?id=" . $row['id'] . "'>" . $row['Titre'] . "</a></td>
+                        <td id='txt_articles'>" . $row['article'] . "</td>
+                        <td id='categorie_articles'>" . $row['nom'] . "</td>
+                        <td id='date_articles'>" . $row['date'] . "</td>
                     </tr>";
                 }
                 echo "</table>";
