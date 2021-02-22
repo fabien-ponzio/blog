@@ -13,7 +13,7 @@ require_once("class/class-article.php");
  $path_articles="pages/articles.php";
  $path_create="pages/creer-article.php";
  $path_admin="pages/admin.php";
- $path_deconnexion="deconnexion.php";
+ $path_deconnexion="pages/deconnexion.php";
  $path_footer='../css/footer.css';
 
 ?>
