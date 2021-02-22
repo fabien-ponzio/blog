@@ -50,6 +50,10 @@
 
 
 /* =============CLASS SPECIFIC================================================================ */
+header{
+    width: 100%;
+    height: 5vh;
+}
 nav ul{
     width: 100%;
     text-decoration: none;
@@ -57,7 +61,7 @@ nav ul{
 }
 nav a{
     text-decoration: none;
-    font-family:Lobster;
+    font-family:Montserrat;
     color: black;
 }
 nav a:hover{
