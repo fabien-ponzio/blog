@@ -43,46 +43,45 @@ require_once('../class/class-article.php');
     <main>
         <?php
 
-        if(isset($_POST['mod'])){
-            $droits = new User();
-            $droits->updateDroit($_POST['moddingUser'], $_POST['droitUser']);
-            $update = new Admin();
-            $update->UpdateNewUser($_POST['moddingUser'], $_POST['UpdateLog'], $_POST['UpdateMail'], $_POST['updatePW'], $_POST['updateCPW']);
-        }
-        if (isset($_POST['createUser'])) {
-            $NewUser = new Admin();
-            $NewUser->registerNewUser($_POST['createLogin'], $_POST['eMail'], $_POST['createPW'], $_POST['confirmPW'], $_POST['droitNewUser']);
-        }
+            if(isset($_POST['mod'])){
+                $droits = new User();
+                $droits->updateDroit($_POST['moddingUser'], $_POST['droitUser']);
+                $update = new Admin();
+                $update->UpdateNewUser($_POST['moddingUser'], $_POST['UpdateLog'], $_POST['UpdateMail'], $_POST['updatePW'], $_POST['updateCPW']);
+            }
+            if (isset($_POST['createUser'])) {
+                $NewUser = new Admin();
+                $NewUser->registerNewUser($_POST['createLogin'], $_POST['eMail'], $_POST['createPW'], $_POST['confirmPW'], $_POST['droitNewUser']);
+            }
 
-        if (isset($_POST['deleteArticle'])){
-            $deleteArticles = new Admin;
-            $deleteArticles->deleteArticle($_POST['titreArticles']);
-        }
-        if (isset($_POST['deleteUser'])) {
-            $delete = new Admin();
-            $delete->deleteUser($_POST['moddingUser']); 
-        }
-        if (isset($_POST['CreateCategorie'])) { 
-            $addCat = new Categorie;
-            $addCat->addCategories($_POST['createCat']);
-        }
-        if (isset($_POST['UpdateCategorie'])){
-            $updateCat = new Categorie;
-            $updateCat->updateCategorie($_POST['updateCat'],$_POST["updateCateg"]);
-        }
-        if (isset($_POST['deleteCat'])){
-            $deleteCat = new Categorie;
-            $deleteCat->deleteCategorie($_POST["delCategorie"]);
-        }
-        if (isset($_POST['updateArticle'])){
-            $updateArticle = new Admin;
-            $updateArticle->updateArticle($_POST['titreArticles'],$_POST['titre'], $_POST['txtarticle'], $_POST['updateCat']);
-        }
-        
-
+            if (isset($_POST['deleteArticle'])){
+                $deleteArticles = new Admin;
+                $deleteArticles->deleteArticle($_POST['titreArticles']);
+            }
+            if (isset($_POST['deleteUser'])) {
+                $delete = new Admin();
+                $delete->deleteUser($_POST['moddingUser']); 
+            }
+            if (isset($_POST['CreateCategorie'])) { 
+                $addCat = new Categorie;
+                $addCat->addCategories($_POST['createCat']);
+            }
+            if (isset($_POST['UpdateCategorie'])){
+                $updateCat = new Categorie;
+                $updateCat->updateCategorie($_POST['updateCat'],$_POST["updateCateg"]);
+            }
+            if (isset($_POST['deleteCat'])){
+                $deleteCat = new Categorie;
+                $deleteCat->deleteCategorie($_POST["delCategorie"]);
+            }
+            if (isset($_POST['updateArticle'])){
+                $updateArticle = new Admin;
+                $updateArticle->updateArticle($_POST['titreArticles'],$_POST['titre'], $_POST['txtarticle'], $_POST['updateCat']);
+            }
         ?>
+
         <h1>Modification de User</h1>
-        <form action="" method="POST">
+        <form action="" method="POST" class="flex column j_around a_center">
             <label>Update User</label>
 
             <select name="moddingUser">
@@ -119,7 +118,7 @@ require_once('../class/class-article.php');
         </form>
 
         <h1>Creation d'Utilisateur</h1>
-        <form action="" method=POST>
+        <form action="" method="POST" class="flex column j_around a_center">
 
             <label for="createLogin">Nouveau Login:</label>
             <input type="text" name="createLogin">
@@ -143,7 +142,7 @@ require_once('../class/class-article.php');
         </form>
 
         <h1>Modification Article</h1>
-        <form action="" method="POST">
+        <form action="" method="POST" class="flex column j_around a_center">
             <label for="">Select Articles</label>
             <select name="titreArticles">
                 <option>Select</option>
@@ -175,13 +174,13 @@ require_once('../class/class-article.php');
 
         <h1>CATEGORIE</h1>
 
-        <form action="" method="POST">
+        <form action="" method="POST" class="flex column j_around a_center">
             <label for="createCat">Nouvelle Categorie</label>
             <input type="text" name="createCat">
             <input type="submit" name='CreateCategorie'>
         </form>
 
-        <form action="" method="POST">
+        <form action="" method="POST" class="flex column j_around a_center">
             <label for="updateCat">Update categorie name</label>
             <select name="updateCat">
                     <option>Select</option>
@@ -194,7 +193,7 @@ require_once('../class/class-article.php');
             <input type="submit" name='UpdateCategorie'>
         </form>
 
-        <form  action="" method="POST">
+        <form action="" method="POST" class="flex column j_around a_center">
             <label for='delCategories'>Supprimer categorie</label>
                 <select name="delCategorie">
                     <option>Select</option>

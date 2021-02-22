@@ -45,6 +45,6 @@ public function displayComment($id){
     $commentaire->bindValue(':id', $id, PDO::PARAM_INT);
     $commentaire->execute();
     $result = $commentaire->fetchAll(); 
-    var_dump($result); 
+    // var_dump($result); 
 }
 }
