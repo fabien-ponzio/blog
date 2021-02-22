@@ -1,0 +1,17 @@
+#headernav{
+    display: flex;
+    justify-content: center;
+}
+#headernav ul{
+    display: flex;
+    justify-content: space-around;
+    width: 80%;
+    text-decoration: none;
+}
+a{
+    text-decoration: none;
+}
+#headernav a:hover{
+    text-decoration: underline;
+    transition: 1.5s;
+}
