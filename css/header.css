@@ -55,8 +55,10 @@ nav ul{
     text-decoration: none;
     list-style-type: none;
 }
-a{
+nav a{
     text-decoration: none;
+    font-family:Lobster;
+    color: black;
 }
 nav a:hover{
     text-decoration: underline;
