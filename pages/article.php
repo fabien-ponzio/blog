@@ -19,6 +19,7 @@ require_once('../class/classCommentaire.php');
  $path_create="creer-article.php";
  $path_admin="admin.php";
  $path_deconnexion="deconnexion.php";
+ $path_footer='../css/footer.css';
  // HEADER
  
  if (isset($_GET['id'])){
@@ -40,17 +41,20 @@ $comment->displayComment($_GET['id']);
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/footer.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Artcile</title>
 </head>
 <body>
-    
-<?php require_once('header.php');?>
+    <main>
+        <?php require_once('header.php');?>
 
-<form action="" method=POST>
-<label for="">Ajouter un commentaire</label>
-<textarea name="comment" id="" cols="30" rows="10"></textarea>
-<input type="submit" name="postComment" value="commenter">
-</form>
+        <form action="" method=POST>
+            <label for="">Ajouter un commentaire</label>
+            <textarea name="comment" id="" cols="30" rows="10"></textarea>
+            <input type="submit" name="postComment" value="commenter">
+        </form>
+    </main>  
+    <?php require_once('footer.php');?>
 </body>
 </html>

@@ -13,7 +13,8 @@ require_once("../class/class-categories.php");
  $path_articles="articles.php";
  $path_create="creer-article.php";
  $path_admin="admin.php";
-$path_deconnexion="deconnexion.php";
+ $path_deconnexion="deconnexion.php";
+ $path_footer='../css/footer.css';
  // HEADER
  require_once('header.php');
 $NewArticle = new Article;
@@ -40,6 +41,7 @@ if (isset($_POST['trierCategorie'])){
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/footer.css">
     <title>Liste Articles</title>
 </head>
 <body>
@@ -60,5 +62,6 @@ if (isset($_POST['trierCategorie'])){
 
         </form>
     </main>
+    <?php require_once('footer.php');?>
 </body>
 </html>
