@@ -27,7 +27,8 @@ if (isset($_SESSION['id_droits'])) {
     if ($_SESSION['id_droits']==42 || $_SESSION['id_droits']==1337) {
         echo" <a class='headerlink' href='$path_create'>CREER ARTICLE</a>";
         echo"
-        <a class='headerlink' href='$path_admin'>ADMIN</a>  ";
+        <a class='headerlink' href='$path_admin'>ADMIN</a>  
+        ";
     }
 }
 
