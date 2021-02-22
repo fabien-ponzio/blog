@@ -13,7 +13,8 @@ require_once("class/class-article.php");
  $path_articles="pages/articles.php";
  $path_create="pages/creer-article.php";
  $path_admin="pages/admin.php";
- $path_deconnexion="deconnexion.php";
+ $path_deconnexion="pages/deconnexion.php";
+ $path_footer='../css/footer.css';
 
 ?>
 
@@ -22,20 +23,22 @@ require_once("class/class-article.php");
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/footer.css">
     <link rel="stylesheet" href="css/index.css">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<body>
-    <?php include_once('pages/header.php'); ?>
+<body class="flex column j_between">
+    
+   <?php include_once('pages/header.php'); ?>
 
     <main class="flex column a_center j_around">
         <h1 class="flex">Le Bouclier</h1>
         <section class="flex j_around a_center">
-            <p>bonjour</p>
+            <p class="txtBouclier">Le bouclier est l'arme défensive la plus ancienne et destinée à parer une attaque</p>
             <img src="ressources/img/Bouclier_rond.jpg" alt="" id="imgBouclierRond">
-            <p>bonjour</p>
+            <p class="txtBouclier">Tout objet permettant d'opposer à l'adversaire une surface derrière laquelle on se protège est appelé un bouclier et celui-ci était parfois de « fortune », assurant une bonne protection pour un coût minimal.</p>
         </section>
 
         <?php
@@ -58,5 +61,6 @@ require_once("class/class-article.php");
             }
         ?>
     </main>
+    <?php require_once('pages/footer.php');?>
 </body>
 </html>

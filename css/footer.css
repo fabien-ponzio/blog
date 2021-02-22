@@ -1,0 +1,9 @@
+footer{
+    width: 100%;
+    margin: auto;
+}
+footer a{
+    color: black;
+    font-family: Lobster;
+    text-decoration: none;
+}

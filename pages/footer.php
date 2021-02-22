@@ -1,6 +1,5 @@
-<link rel="stylesheet" href="<?= $path_footer; ?>">
 
-<footer>
+<footer class="flex j_around a_center a_end">
 
     <a class='headerlink' href='$path_profil'>PROFIL</a>
     <a class='headerlink' href='$path_articles'>Articles</a>
@@ -12,5 +11,3 @@
     <a class='headerlink' href='$path_admin'>DOUBLE</a>
 
 </footer>
-</body>
-</html>

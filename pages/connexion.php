@@ -12,7 +12,8 @@ require_once('../class/user.php');
  $path_articles="articles.php";
  $path_create="creer-article.php";
  $path_admin="admin.php";
-  $path_deconnexion="deconnexion.php";
+ $path_deconnexion="deconnexion.php";
+ $path_footer='../css/footer.css';
  // HEADER
  require_once('header.php');
 
@@ -27,23 +28,22 @@ if (isset($_POST["connect"])){
                 $user = new User();
                 $user->ConnectUser($_POST['login'], $_POST['password']);
                 }
-                var_dump($_POST);
+                //var_dump($_POST);
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="../css/connexion.css">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
 <body>
- <main>
-    <form action="" method="POST">
-                <?php
-                var_dump($_SESSION);
-                ?>
+ <main id="mainConnect">
+    <form id="form_connect" action="" method="POST">
         <label for="login">login</label>
         <input type="text" name="login">
         <label for="password" name="password">mdp</label>
@@ -51,6 +51,7 @@ if (isset($_POST["connect"])){
         <input type="submit" name="connect" value="go!">
 
     </form>
-</main>   
+</main>  
+    <?php require_once('footer.php');?>
 </body>
-
+</html>
