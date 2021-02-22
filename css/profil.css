@@ -1,18 +1,24 @@
+body{
+    margin: 0;
+}
 main {
     width: 100%;
     height: 90vh;
     font-family: Montserrat, cursive;
-    background: url('../ressources/img/triangle-mosaic.png');
-    color: rgba(25, 25, 25, 0.8);
+    min-height: 100%;
+    background-image: url(../ressources/img/shieldco.PNG);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
 }
 
 form {
     width: 50%;
     height: 70%;
-    background-color: rgba(25, 25, 25, 0.1);
+    background-color: rgba(25, 25, 25, 0.7);
     box-shadow: 1px 1px 10px black;
     border-radius: 15px;
-    color: Black;
+    color: white;
 }
 
 form>section {
