@@ -38,12 +38,13 @@ $comment->displayComment($_GET['id']);
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="../css/article.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Artcile</title>
 </head>
 <body>
     <?php require_once('header.php');?>
-    <main>
+    <main class="flex column j_around a_center" id="">
         <?php 
         if (isset($_GET['id'])){
             $article = new Article;
@@ -51,19 +52,31 @@ $comment->displayComment($_GET['id']);
             echo "<table class='flex column j_center a_center' id=''>";
                 foreach($_SESSION['articleId'] as $row){
                     echo 
-                    "<tr>
+                    "<td>
                         <td>" . $row['Titre'] . "</td>
                         <td>" . $row['article'] . "</td>
                         <td>" . $row['nom'] ."</td>
                         <td>" . $row['date'] ."</td>
-                    </tr>";
+                    </td>";
+                }
+                echo "</table>";
+            $article = new Commentaires;
+            $article->displayComment($_GET['id']);
+            echo "<table class='flex column j_center a_center' id=''>";
+                foreach($_SESSION['commentaire'] as $row){
+                    echo 
+                    "<td>
+                        <td>" . $row['login'] . "</td>
+                        <td>" . $row['commentaire'] . "</td>
+                        <td>" . $row['date'] ."</td>
+                    </td>";
                 }
                 echo "</table>";
         }
         ?>
-        <form action="" method=POST>
-            <label for="">Ajouter un commentaire</label>
-            <textarea name="comment" id="" cols="30" rows="10"></textarea>
+        <form id="formCom" action="" method=POST>
+            <label for="">Ajouter un commentaire</label><br>
+            <textarea name="comment" id="" cols="30" rows="10"></textarea><br>
             <input type="submit" name="postComment" value="commenter">
         </form>
     </main>  
