@@ -34,13 +34,14 @@ require_once('../class/class-article.php');
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="../css/admin.css">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin</title>
 </head>
 
 <body>
-    <main>
+    <main class="flex column j_around" id="">
         <?php
 
             if(isset($_POST['mod'])){
@@ -80,8 +81,9 @@ require_once('../class/class-article.php');
             }
         ?>
 
-        <h1>Modification de User</h1>
+        
         <form action="" method="POST" class="flex j_around a_center">
+            <h1>Modification de User</h1>
             <div class="flex column">
                 <label>Update User</label>
 
@@ -127,14 +129,14 @@ require_once('../class/class-article.php');
                 </div>
 
                 <div class="flex column">
-                    <input type="submit" name="mod" value="go!">
-                    <input type="submit" name="deleteUser" value="supprimew">
+                    <input type="submit" name="mod" value="Envoyer">
+                    <input type="submit" name="deleteUser" value="Supprimer">
                 </div>
         </form>
 
-        <h1>Creation d'Utilisateur</h1>
+        
         <form action="" method="POST" class="flex j_around a_center">
-
+            <h1>Creation d'Utilisateur</h1>
             <div class="flex column">
                 <label for="createLogin">Nouveau Login:</label>
                 <input type="text" name="createLogin">
@@ -170,9 +172,9 @@ require_once('../class/class-article.php');
 
         </form>
 
-        <h1>Modification Article</h1>
+        
         <form action="" method="POST" class="flex j_around a_center">
-            
+            <h1>Modification Article</h1>
             <div class="flex column">
                 <label for="">Select Articles</label>
                 <select name="titreArticles">
@@ -191,7 +193,7 @@ require_once('../class/class-article.php');
 
             <div class="flex column">
                 <label for="">New Texte</label>
-                <textarea name="txtarticle" cols="80" rows="10"></textarea>
+                <textarea name="txtarticle" cols="40" rows="5"></textarea>
             </div>
 
             <div class="flex column">
@@ -206,15 +208,15 @@ require_once('../class/class-article.php');
             </div>
 
             <div class="flex column">
-                <input type="submit" name="updateArticle" value="Update"></input>
-                <input type="submit" value="Delete" name="deleteArticle">
+                <input type="submit" name="updateArticle" value="Envoyer"></input>
+                <input type="submit" value="Supprimer" name="deleteArticle">
             </div>
         </form>
 
 
 
-        <h1>CATEGORIE</h1>
-
+        
+<h1>Modification Categorie</h1>
         <form action="" method="POST" class="flex j_around a_center">
             
             <div class="flex column">
@@ -224,17 +226,23 @@ require_once('../class/class-article.php');
             </div>
         </form>
 
-        <form action="" method="POST" class="flex column j_around a_center">
-            <label for="updateCat">Update categorie name</label>
-            <select name="updateCat">
+        <form action="" method="POST" class="flex j_around a_center">
+            
+            <div class="flex column">
+                <label for="updateCat">Update categorie name</label>
+                <select name="updateCat">
                     <option>Select</option>
                         <?php
                         $deleteCat = new Article();
                         $deleteCat->dropDownDisplay();
                         ?>
                 </select>
-            <input type="text" name="updateCateg">
-            <input type="submit" name='UpdateCategorie'>
+            </div>
+
+            <div class="flex column">
+                <input type="text" name="updateCateg">
+                <input type="submit" name='UpdateCategorie'>
+            </div>
         </form>
 
         <form action="" method="POST" class="flex column j_around a_center">
@@ -252,6 +260,7 @@ require_once('../class/class-article.php');
         <?php require_once('footer.php');?> 
 </body>
 </html>
-<?php $tableDroits = new Admin;
-        $tableDroits->userTable();
+<?php 
+    // $tableDroits = new Admin;
+    // $tableDroits->userTable();
 } ?>  
