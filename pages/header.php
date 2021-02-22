@@ -1,7 +1,7 @@
 
 <header>
-    <nav id="headernav">
-        <ul>        
+    <nav class="flex j_center" id="headernav">
+        <ul class="flex j_around">        
             <li><a class='headerlink' href="<?= $path_index ?>">INDEX</a></li>
     
 
