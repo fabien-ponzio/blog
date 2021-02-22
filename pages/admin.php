@@ -81,103 +81,147 @@ require_once('../class/class-article.php');
         ?>
 
         <h1>Modification de User</h1>
-        <form action="" method="POST" class="flex column j_around a_center">
-            <label>Update User</label>
+        <form action="" method="POST" class="flex j_around a_center">
+            <div class="flex column">
+                <label>Update User</label>
 
-            <select name="moddingUser">
-                <option>Select</option>
+                    <select name="moddingUser">
+                        <option>Select</option>
 
-                <?php
-                $article = new User();
-                $article->getDisplay();
-                ?>
-            </select>
+                        <?php
+                        $article = new User();
+                        $article->getDisplay();
+                        ?>
+                    </select>
+            </div>
 
-                <label for="UpdateLog">Changez le nv pseudo</label>
-                <input type="text" name="UpdateLog">
+                <div class="flex column">
+                    <label for="UpdateLog">Changez le nv pseudo</label>
+                    <input type="text" name="UpdateLog">
+                </div>
 
-                <label for="UpdateMail">E-Mail:</label>
-                <input type="eMail" name="UpdateMail">
+                <div class="flex column">
+                    <label for="UpdateMail">E-Mail:</label>
+                    <input type="eMail" name="UpdateMail">
+                </div>
+                
+                <div class="flex column">
+                    <label for="updatePW">Nouveau mot de passe:</label>
+                    <input type="password" name="updatePW">
+                </div>
 
-                <label for="updatePW">Nouveau mot de passe:</label>
-                <input type="password" name="updatePW">
+                <div class="flex column">
+                    <label for="updateCPW">Confirmez le mot de passe: </label>
+                    <input type="password" name="updateCPW">
+                </div>
 
-                <label for="updateCPW">Confirmez le mot de passe: </label>
-                <input type="password" name="updateCPW">
+                <div class="flex column">
+                    <label>Select Droits</label>
+                    <select name="droitUser">
+                        <option>Select</option>
+                        <?php
+                        $droits = new Droits();
+                        $droits->displayChoice();
+                        ?>
+                    </select>
+                </div>
 
-                <label>Select Droits</label>
-            <select name="droitUser">
-                <option>Select</option>
-                <?php
-                $droits = new Droits();
-                $droits->displayChoice();
-                ?>
-            </select>
-            <input type="submit" name="mod" value="go!">
-            <input type="submit" name="deleteUser" value="supprimew">
+                <div class="flex column">
+                    <input type="submit" name="mod" value="go!">
+                    <input type="submit" name="deleteUser" value="supprimew">
+                </div>
         </form>
 
         <h1>Creation d'Utilisateur</h1>
-        <form action="" method="POST" class="flex column j_around a_center">
+        <form action="" method="POST" class="flex j_around a_center">
 
-            <label for="createLogin">Nouveau Login:</label>
-            <input type="text" name="createLogin">
-            <label for="eMail">E-Mail:</label>
-            <input type="email" name="eMail">
-            <label for="createPW">Nouveau mot de passe:</label>
-            <input type="password" name="createPW">
-            <label for="ConfirmPW">Confirmez le mot de passe: </label>
-            <input type="password" name="confirmPW">
+            <div class="flex column">
+                <label for="createLogin">Nouveau Login:</label>
+                <input type="text" name="createLogin">
+            </div>
 
-            <label>Select Droits</label>
-            <select name="droitNewUser">
-                <option>Select</option>
-                <?php
-                $droits = new Droits();
-                $droits->displayChoice();
-                ?>
-            </select>
+            <div class="flex column">
+                <label for="eMail">E-Mail:</label>
+                <input type="email" name="eMail">
+            </div>
+
+            <div class="flex column">
+                <label for="createPW">Nouveau mot de passe:</label>
+                <input type="password" name="createPW">
+            </div>
+
+            <div class="flex column">
+                <label for="ConfirmPW">Confirmez le mot de passe: </label>
+                <input type="password" name="confirmPW">
+            </div>
+
+            <div class="flex column">
+                <label>Select Droits</label>
+                <select name="droitNewUser">
+                    <option>Select</option>
+                    <?php
+                    $droits = new Droits();
+                    $droits->displayChoice();
+                    ?>
+                </select>
+            </div>
+
             <input type="submit" name="createUser">
 
         </form>
 
         <h1>Modification Article</h1>
-        <form action="" method="POST" class="flex column j_around a_center">
-            <label for="">Select Articles</label>
-            <select name="titreArticles">
-                <option>Select</option>
-                <?php
-                    $articles = new Admin();
-                    $articles->getDisplay();
-                ?>
-            </select>
+        <form action="" method="POST" class="flex j_around a_center">
+            
+            <div class="flex column">
+                <label for="">Select Articles</label>
+                <select name="titreArticles">
+                    <option>Select</option>
+                    <?php
+                        $articles = new Admin();
+                        $articles->getDisplay();
+                    ?>
+                </select>
+            </div>
 
-            <label for="">New Titres</label>
-            <input type="text" name="titre">
+            <div class="flex column">
+                <label for="">New Titres</label>
+                <input type="text" name="titre">
+            </div>
 
-            <label for="">New Texte</label>
-            <textarea name="txtarticle" cols="80" rows="10"></textarea>
+            <div class="flex column">
+                <label for="">New Texte</label>
+                <textarea name="txtarticle" cols="80" rows="10"></textarea>
+            </div>
 
-            <label for="">Select categorie</label>
-            <select name="updateCat">
+            <div class="flex column">
+                <label for="">Select categorie</label>
+                <select name="updateCat">
                     <option>Select</option>
                         <?php
                         $deleteCat = new Article();
                         $deleteCat->dropDownDisplay();
                         ?>
                 </select>
-            <input type="submit" name="updateArticle" value="Update"></input>
-            <input type="submit" value="Delete" name="deleteArticle">
+            </div>
+
+            <div class="flex column">
+                <input type="submit" name="updateArticle" value="Update"></input>
+                <input type="submit" value="Delete" name="deleteArticle">
+            </div>
         </form>
 
 
 
         <h1>CATEGORIE</h1>
 
-        <form action="" method="POST" class="flex column j_around a_center">
-            <label for="createCat">Nouvelle Categorie</label>
-            <input type="text" name="createCat">
-            <input type="submit" name='CreateCategorie'>
+        <form action="" method="POST" class="flex j_around a_center">
+            
+            <div class="flex column">
+                <label for="createCat">Nouvelle Categorie</label>
+                <input type="text" name="createCat">
+                <input type="submit" name='CreateCategorie'>
+            </div>
         </form>
 
         <form action="" method="POST" class="flex column j_around a_center">
