@@ -60,6 +60,18 @@ $comment->displayComment($_GET['id']);
                     </td>";
                 }
                 echo "</table>";
+            $article = new Commentaires;
+            $article->displayComment($_GET['id']);
+            echo "<table class='flex column j_center a_center' id=''>";
+                foreach($_SESSION['commentaire'] as $row){
+                    echo 
+                    "<td>
+                        <td>" . $row['login'] . "</td>
+                        <td>" . $row['commentaire'] . "</td>
+                        <td>" . $row['date'] ."</td>
+                    </td>";
+                }
+                echo "</table>";
         }
         ?>
         <form id="formCom" action="" method=POST>
