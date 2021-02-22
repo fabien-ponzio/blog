@@ -25,11 +25,12 @@ require_once('../class/user.php');
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="../css/creer-article.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
 <body>
-    <main>
+    <main id="mainCreate">
     <?php
 
     // public function create($article, $id_utilisateur, $id_categorie, $date) 
@@ -41,28 +42,31 @@ require_once('../class/user.php');
 
 
     ?>
+        <article id="boxForm">
+            <form action="" method="POST" class="flex column a_center j_around">
+                <label for="Titre">Titre</label><br>
+                <input class="BookingInput" type="text" name="titre">
 
-        <form action="" method="POST">
-            <label for="Titre">Titre</label>
-            <input type="text" name="titre">
+                <label for="article"></label>
+                <textarea class="BookingInput" name="article" placeholder="Type article here"></textarea>
 
-            <label for="article">article</label>
-            <textarea name="article" placeholder="Type article here"></textarea>
+                <label>Categories</label>
+                    <select class="BookingInput" name="categorie">
+                        <option>Select</option>
+                            <?php
+                            $article = new Article();
+                            $article->dropDownDisplay();
 
-            <label>categorie</label>
-                <select name="categorie">
-                    <option>Select</option>
-                        <?php
-                        $article = new Article();
-                        $article->dropDownDisplay();
+                            ?>
 
-                        ?>
+                    </select>   
+                <input class="BookingInput" type="submit" name="create" value="go!">
 
-                </select>   
-            <input type="submit" name="create" value="go!">
-
-        </form>
-            <?php require_once('footer.php');?>
+            </form>
+               
+        </article> 
+          
     </main>
+ <?php require_once('footer.php');?> 
 </body>
 </html>
