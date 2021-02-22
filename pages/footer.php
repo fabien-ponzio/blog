@@ -12,5 +12,3 @@
     <a class='headerlink' href='$path_admin'>DOUBLE</a>
 
 </footer>
-</body>
-</html>

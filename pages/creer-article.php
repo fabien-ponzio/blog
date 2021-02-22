@@ -28,38 +28,40 @@ require_once('../class/user.php');
     <title>Document</title>
 </head>
 <body>
-<?php
+    <main>
+    <?php
 
-// public function create($article, $id_utilisateur, $id_categorie, $date) 
-    if(isset($_POST['create'])){
-        $article = new Article();
-        $article->create($_POST['titre'],$_POST['article'], $_POST['categorie']);
-    }
+    // public function create($article, $id_utilisateur, $id_categorie, $date) 
+        if(isset($_POST['create'])){
+            $article = new Article();
+            $article->create($_POST['titre'],$_POST['article'], $_POST['categorie']);
+        }
 
 
 
-?>
+    ?>
 
-    <form action="" method="POST">
-        <label for="Titre">Titre</label>
-        <input type="text" name="titre">
+        <form action="" method="POST">
+            <label for="Titre">Titre</label>
+            <input type="text" name="titre">
 
-        <label for="article">article</label>
-        <textarea name="article" placeholder="Type article here"></textarea>
+            <label for="article">article</label>
+            <textarea name="article" placeholder="Type article here"></textarea>
 
-        <label>categorie</label>
-            <select name="categorie">
-                <option>Select</option>
-                    <?php
-                      $article = new Article();
-                      $article->dropDownDisplay();
+            <label>categorie</label>
+                <select name="categorie">
+                    <option>Select</option>
+                        <?php
+                        $article = new Article();
+                        $article->dropDownDisplay();
 
-                    ?>
+                        ?>
 
-            </select>   
-        <input type="submit" name="create" value="go!">
+                </select>   
+            <input type="submit" name="create" value="go!">
 
-    </form>
-
+        </form>
+            <?php require_once('footer.php');?>
+    </main>
 </body>
 </html>

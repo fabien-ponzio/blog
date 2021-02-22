@@ -12,7 +12,8 @@ require_once('../class/user.php');
  $path_articles="articles.php";
  $path_create="creer-article.php";
  $path_admin="admin.php";
-  $path_deconnexion="deconnexion.php";
+ $path_deconnexion="deconnexion.php";
+ $path_footer='../css/footer.css';
  // HEADER
  require_once('header.php');
 
@@ -51,6 +52,7 @@ if (isset($_POST["connect"])){
         <input type="submit" name="connect" value="go!">
 
     </form>
-</main>   
+</main>  
+    <?php require_once('footer.php');?>
 </body>
-
+</html>

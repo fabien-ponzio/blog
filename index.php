@@ -14,6 +14,7 @@ require_once("class/class-article.php");
  $path_create="pages/creer-article.php";
  $path_admin="pages/admin.php";
  $path_deconnexion="deconnexion.php";
+ $path_footer='../css/footer.css';
 
 ?>
 
@@ -27,26 +28,29 @@ require_once("class/class-article.php");
     <title>Document</title>
 </head>
 <body>
-    <?php include_once('pages/header.php');
-    
-        $NewArticle = new Article;
-    // $NewArticle->displayArticle();
-    $NewArticle->articlepageIndex();
-    if (isset($_POST['trierCategorie'])){
-        $trie = new Article;
-        $trie->articleByCategoryIndex($_POST['updateCat']);
-        echo "<table>";
-        foreach($_SESSION['categorie'] as $row){
-            echo 
-            "<tr>
-                <td>" . $row['Titre'] . "</td>
-                <td>" . $row['article'] . "</td>
-                <td>" . $row['nom'] ."</td>
-                <td>" . $row['date'] ."</td>
-            </tr>";
+    <main>
+        <?php include_once('pages/header.php');
+        
+            $NewArticle = new Article;
+        // $NewArticle->displayArticle();
+        $NewArticle->articlepageIndex();
+        if (isset($_POST['trierCategorie'])){
+            $trie = new Article;
+            $trie->articleByCategoryIndex($_POST['updateCat']);
+            echo "<table>";
+            foreach($_SESSION['categorie'] as $row){
+                echo 
+                "<tr>
+                    <td>" . $row['Titre'] . "</td>
+                    <td>" . $row['article'] . "</td>
+                    <td>" . $row['nom'] ."</td>
+                    <td>" . $row['date'] ."</td>
+                </tr>";
+            }
+            echo "</table>";
         }
-        echo "</table>";
-    }
-    ?>
+        ?>
+    </main> 
+    <?php require_once('pages/footer.php');?>
 </body>
 </html>
