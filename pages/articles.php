@@ -34,7 +34,7 @@ require_once("../class/class-categories.php");
             if (isset($_POST['trierCategorie'])){
                 $trie = new Article;
                 $trie->articleByCategory($_POST['updateCat']);
-                echo "<table class='flex column j_center a_center' id=''>";
+                echo "<table class='flex column j_center a_center' id='tableauArt'>";
                 foreach($_SESSION['categorie'] as $row){
                     echo 
                     "<tr>
