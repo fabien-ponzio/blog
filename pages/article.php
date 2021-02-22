@@ -22,11 +22,7 @@ require_once('../class/classCommentaire.php');
  $path_footer='../css/footer.css';
  // HEADER
  
- if (isset($_GET['id'])){
-     $article = new Article;
-     $article->ArticleById($_GET['id']);
-     var_dump($_GET['id']);
- }
+ 
  
 $login = $_SESSION['utilisateur'];
 if(isset($_POST["postComment"])){
@@ -46,9 +42,25 @@ $comment->displayComment($_GET['id']);
     <title>Artcile</title>
 </head>
 <body>
+    <?php require_once('header.php');?>
     <main>
-        <?php require_once('header.php');?>
-
+        <?php 
+        if (isset($_GET['id'])){
+            $article = new Article;
+            $article->ArticleById($_GET['id']);
+            echo "<table class='flex column j_center a_center' id=''>";
+                foreach($_SESSION['articleId'] as $row){
+                    echo 
+                    "<tr>
+                        <td>" . $row['Titre'] . "</td>
+                        <td>" . $row['article'] . "</td>
+                        <td>" . $row['nom'] ."</td>
+                        <td>" . $row['date'] ."</td>
+                    </tr>";
+                }
+                echo "</table>";
+        }
+        ?>
         <form action="" method=POST>
             <label for="">Ajouter un commentaire</label>
             <textarea name="comment" id="" cols="30" rows="10"></textarea>

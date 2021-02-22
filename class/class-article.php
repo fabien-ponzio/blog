@@ -148,8 +148,8 @@
         FROM articles a INNER JOIN categories c ON a.id_categorie = c.id WHERE a.id = :id");
         $article->bindValue(':id', $id, PDO::PARAM_INT);
         $article->execute();
-        $result = $article->fetch();
-        var_dump($result, $id);
+        $result = $article->fetchAll();
+        $_SESSION['articleId'] = $result;
     }
 //-------------------------------------------afficher les 3 dernier articles index----------------------------------
 public function articlepageIndex(){
