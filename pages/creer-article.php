@@ -43,7 +43,7 @@ require_once('../class/user.php');
 
     ?>
         <article id="boxForm">
-            <form action="" method="POST">
+            <form action="" method="POST" class="flex column a_center j_around">
                 <label for="Titre">Titre</label><br>
                 <input class="BookingInput" type="text" name="titre">
 
