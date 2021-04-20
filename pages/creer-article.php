@@ -12,10 +12,7 @@ require_once('../class/user.php');
  $path_articles="articles.php";
  $path_create="creer-article.php";
  $path_admin="admin.php";
- $path_bouclier="bouclier.php";
- $path_bouclierepee="bouclier-eppe.php";
- $path_boucliermasse="bouclier-masse.php";
- $path_double="double.php";
+  $path_deconnexion="deconnexion.php";
  // HEADER
  require_once('header.php');
 
@@ -26,42 +23,50 @@ require_once('../class/user.php');
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="../css/creer-article.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
 <body>
-<?php
+    <main id="mainCreate">
+    <?php
 
-// public function create($article, $id_utilisateur, $id_categorie, $date) 
-    if(isset($_POST['create'])){
-        $article = new Article();
-        $article->create($_POST['titre'],$_POST['article'], $_POST['categorie']);
-    }
+    // public function create($article, $id_utilisateur, $id_categorie, $date) 
+        if(isset($_POST['create'])){
+            $article = new Article();
+            $article->create($_POST['titre'],$_POST['article'], $_POST['categorie']);
+        }
 
 
 
-?>
+    ?>
+        <article id="boxForm">
+            <form action="" method="POST" class="flex column a_center j_around">
+                <label for="Titre">Titre</label><br>
+                <input class="BookingInput" type="text" name="titre">
 
-    <form action="" method="POST">
-        <label for="Titre">Titre</label>
-        <input type="text" name="titre">
+                <label for="article"></label>
+                <textarea class="BookingInput" name="article" placeholder="Type article here"></textarea>
 
-        <label for="article">article</label>
-        <textarea name="article" placeholder="Type article here"></textarea>
+                <label>Categories</label>
+                    <select class="BookingInput" name="categorie">
+                        <option>Select</option>
+                            <?php
+                            $article = new Article();
+                            $article->dropDownDisplay();
 
-        <label>categorie</label>
-            <select name="categorie">
-                <option>Select</option>
-                    <?php
-                      $article = new Article();
-                      $article->dropDownDisplay();
+                            ?>
 
-                    ?>
+                    </select>   
+                <input class="BookingInput" type="submit" name="create" value="go!">
 
-            </select>   
-        <input type="submit" name="create" value="go!">
-
-    </form>
-
+            </form>
+               
+        </article> 
+          
+    </main>
+ <?php require_once('footer.php');?> 
 </body>
 </html>

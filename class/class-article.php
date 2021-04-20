@@ -13,12 +13,6 @@
             $this->db = connect();
         }
 
-// ----------------------------- Anti injection sql --------------------------------------
-        // function cleanQuery($article){
-        //     if(get_magic_quotes_gpc())   // pas de duplicate backslashes
-        //         $article = stripslashes($article);
-        //     return mysql_escape_string($article);
-        // }
 
 // ----------------------------- Créé article --------------------------------------
 
@@ -51,6 +45,10 @@
         }
         return $tableau;
     }
+
+
+
+    
     public function dropDownDisplay()
     {
         $modelDroit = new Article;
@@ -59,6 +57,11 @@
             echo '<option value="' . $value[0] . '">' . $value[1] . '</option>';
         }
     }
+
+
+
+
+
 
         public function articlepage(){
             $total = $this->db->query("SELECT COUNT(*) FROM articles")->fetchColumn();
@@ -89,7 +92,7 @@
             $nextlink = ($page < $pages) ? '<a href="?page=' . ($page + 1) . '" title="Next page">&rsaquo;</a> <a href="?page=' . $pages . '" title="Last page">&raquo;</a>' : '<span class="disabled">&rsaquo;</span> <span class="disabled">&raquo;</span>';
 
         // Display the paging information
-            echo '<div id="paging"><p>', $prevlink, ' Page ', $page, ' of ', $pages, ' pages, displaying ', $start, '-', $end, ' of ', $total, ' results ', $nextlink, ' </p></div>';
+            echo '<div id="paging"><p>', $prevlink, ' Page ', $page,' sur ', $total, $nextlink, ' </p></div>';
 
             //Prepare the page of query
             $article=$this->db->prepare(
@@ -111,10 +114,10 @@
                 foreach($iterator as $row){
                 echo 
                     "<tr>
-                        <td> <a href='article.php?id=" . $row['id'] . "'>" . $row['Titre'] . "</a></td>
-                        <td>" . $row['article'] . "</td>
-                        <td>" . $row['nom'] . "</td>
-                        <td>" . $row['date'] . "</td>
+                        <td id='Titre_articles'> <a href='article.php?id=" . $row['id'] . "'>" . $row['Titre'] . "</a></td>
+                        <td id='txt_articles'>" . $row['article'] . "</td>
+                        <td id='categorie_articles'>" . $row['nom'] . "</td>
+                        <td id='date_articles'>" . $row['date'] . "</td>
                     </tr>";
                 }
                 echo "</table>";
@@ -122,6 +125,8 @@
                 echo '<p> No result could be displayed</p>';
             }
         }
+
+
 
 
     public function articleByCategory($categorie){
@@ -135,13 +140,16 @@
 
     }
 
+
+
+
     public function ArticleById($id){
         $article = $this->db->prepare("SELECT a.article, a.id_categorie, a.date, a.Titre, a.id, c.nom, c.id
         FROM articles a INNER JOIN categories c ON a.id_categorie = c.id WHERE a.id = :id");
         $article->bindValue(':id', $id, PDO::PARAM_INT);
         $article->execute();
-        $result = $article->fetch();
-        var_dump($result, $id);
+        $result = $article->fetchAll();
+        $_SESSION['articleId'] = $result;
     }
 //-------------------------------------------afficher les 3 dernier articles index----------------------------------
 public function articlepageIndex(){
@@ -184,7 +192,7 @@ public function articlepageIndex(){
         foreach($iterator as $row){
         echo 
             "<tr>
-                <td> <a href='article.php?id=" . $row['id'] . "'>" . $row['Titre'] . "</a></td>
+                <td>" . $row['Titre'] . "</td>
                 <td>" . $row['article'] . "</td>
                 <td>" . $row['nom'] . "</td>
                 <td>" . $row['date'] . "</td>
