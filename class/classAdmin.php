@@ -21,8 +21,6 @@ class Admin{
     }
 
 
-
-
 // ------------------------------------ REGISTER NEW USER DEPUIS ADMIN.PHP ------------------------------------------//
 
     public function registerNewUser ($login, $email, $password, $confirmPW, $id_droits){
